@@ -30,7 +30,6 @@
     "should": "^5.2.0"
   },
   "dependencies": {
-    "@adexchange/aeg-logger": "0.0.29",
     "lodash": "^4.14.0"
   },
   "engine": "node >= 4.1"
