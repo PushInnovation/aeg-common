@@ -2,6 +2,7 @@
 
 import logger from '@adexchange/aeg-logger';
 import {EventEmitter} from 'events';
+import _ from 'lodash';
 
 /**
  * Base class for common operations
@@ -19,7 +20,7 @@ class Base extends EventEmitter {
 		const body = {};
 
 		if (options.message) {
-			body.message = `${this.constructor.name}#${caller}: ` + options.message;
+			body.message = `${_.camelCase(this.constructor.name)}#${caller}: ` + options.message;
 		}
 
 		if (options.data) {
@@ -81,9 +82,9 @@ class Base extends EventEmitter {
 		let logMessage;
 
 		if (options.message) {
-			logMessage = `${this.constructor.name}#${caller}: ${options.message}`;
+			logMessage = `${_.camelCase(this.constructor.name)}#${caller}: ${options.message}`;
 		} else {
-			logMessage = `${this.constructor.name}#${caller}`;
+			logMessage = `${_.camelCase(this.constructor.name)}#${caller}`;
 		}
 
 		if (options.data) {
