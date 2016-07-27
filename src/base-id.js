@@ -22,6 +22,19 @@ class BaseId extends Base {
 	}
 
 	/**
+	 * Emit an event
+	 * @param {string} event
+	 * @param {string} caller
+	 * @param {Object} options
+	 */
+	emit(event, caller, options = {}) {
+		const data = {};
+		data[this.constructor.name].id = this._id;
+		options.data = options.data ? _.extend(options.data, data) : data;
+		super.emit(event, caller, options);
+	}
+
+	/**
 	 * Log debug
 	 * @param {string} caller
 	 * @param {Object} options

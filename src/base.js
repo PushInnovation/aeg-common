@@ -1,11 +1,37 @@
 'use strict';
 
 import logger from '@adexchange/aeg-logger';
+import {EventEmitter} from 'events';
 
 /**
  * Base class for common operations
  */
-class Base {
+class Base extends EventEmitter {
+
+	/**
+	 * Emit an event
+	 * @param {string} event
+	 * @param {string} caller
+	 * @param {Object} options
+	 */
+	emit(event, caller, options = {}) {
+
+		const body = {};
+
+		if (options.message) {
+			body.message = `${this.constructor.name}#${caller}: ` + options.message;
+		}
+
+		if (options.data) {
+			body.data = options.data;
+		}
+
+		if (options.err) {
+			body.err = options.err;
+		}
+
+		super.emit(event, body);
+	}
 
 	/**
 	 * Log debug
