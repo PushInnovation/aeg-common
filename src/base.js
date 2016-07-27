@@ -14,7 +14,7 @@ class Base extends EventEmitter {
 	 */
 	constructor(options = {}) {
 		if (options.logger) {
-			this._logger = logger;
+			this._logger = options.logger;
 		}
 	}
 
