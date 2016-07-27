@@ -19,7 +19,7 @@ class Base extends EventEmitter {
 		const body = {};
 
 		if (options.message) {
-			body.message = `${this.constructor.name}#${caller}: ` + options.message;
+			body.message = `${this.constructor.name.toLower()}#${caller}: ` + options.message;
 		}
 
 		if (options.data) {
@@ -81,9 +81,9 @@ class Base extends EventEmitter {
 		let logMessage;
 
 		if (options.message) {
-			logMessage = `${this.constructor.name}#${caller}: ${options.message}`;
+			logMessage = `${this.constructor.name.toLower()}#${caller}: ${options.message}`;
 		} else {
-			logMessage = `${this.constructor.name}#${caller}`;
+			logMessage = `${this.constructor.name.toLower()}#${caller}`;
 		}
 
 		if (options.data) {
