@@ -13,7 +13,7 @@ class BaseId extends Base {
 	 * @param {number} id
 	 * @param {Object} options
 	 */
-	constructor(id, options) {
+	constructor(id, options = {}) {
 		super(options);
 		this._id = id;
 	}
