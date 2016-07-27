@@ -1,6 +1,5 @@
 'use strict';
 
-import logger from '@adexchange/aeg-logger';
 import {EventEmitter} from 'events';
 import _ from 'lodash';
 
@@ -8,6 +7,16 @@ import _ from 'lodash';
  * Base class for common operations
  */
 class Base extends EventEmitter {
+
+	/**
+	 * Constructor
+	 * @param {Object} options
+	 */
+	constructor(options = {}) {
+		if (options.logger) {
+			this._logger = logger;
+		}
+	}
 
 	/**
 	 * Emit an event
@@ -40,7 +49,9 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 */
 	debug(caller, options = {}) {
-		this._log(logger.debug, caller, options);
+		if (this._logger) {
+			this._log(this._logger.debug, caller, options);
+		}
 	}
 
 	/**
@@ -49,7 +60,9 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 */
 	info(caller, options = {}) {
-		this._log(logger.info, caller, options);
+		if (this._logger) {
+			this._log(this._logger.info, caller, options);
+		}
 	}
 
 	/**
@@ -58,7 +71,9 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 */
 	warn(caller, options = {}) {
-		this._log(logger.warn, caller, options);
+		if (this._logger) {
+			this._log(this._logger.warn, caller, options);
+		}
 	}
 
 	/**
@@ -67,7 +82,9 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 */
 	error(caller, options = {}) {
-		this._log(logger.error, caller, options);
+		if (this._logger) {
+			this._log(this._logger.error, caller, options);
+		}
 	}
 
 	/**
@@ -79,6 +96,10 @@ class Base extends EventEmitter {
 	 */
 	_log(delegate, caller, options = {}) {
 
+		if (!this._logger) {
+			return;
+		}
+
 		let logMessage;
 
 		if (options.message) {
@@ -89,13 +110,13 @@ class Base extends EventEmitter {
 
 		if (options.data) {
 			if (options.err) {
-				logger.errorWithMessage(logMessage, options.data, options.err);
+				this._logger.errorWithMessage(logMessage, options.data, options.err);
 			} else {
 				delegate(logMessage, options.data);
 			}
 		} else {
 			if (!options.data && options.err) {
-				logger.errorWithMessage(logMessage, options.err);
+				this._logger.errorWithMessage(logMessage, options.err);
 			} else {
 				delegate(logMessage);
 			}
