@@ -13,6 +13,9 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 */
 	constructor(options = {}) {
+
+		super();
+
 		if (options.logger) {
 			this._logger = options.logger;
 		}

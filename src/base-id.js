@@ -14,7 +14,9 @@ class BaseId extends Base {
 	 * @param {Object} options
 	 */
 	constructor(id, options = {}) {
+
 		super(options);
+
 		this._id = id;
 	}
 
