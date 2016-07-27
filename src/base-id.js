@@ -8,8 +8,13 @@ import _ from 'lodash';
  */
 class BaseId extends Base {
 
-	constructor(id) {
-		super();
+	/**
+	 * Constructor
+	 * @param {number} id
+	 * @param {Object} options
+	 */
+	constructor(id, options = {}) {
+		super(options);
 		this._id = id;
 	}
 
