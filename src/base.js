@@ -22,6 +22,24 @@ class Base extends EventEmitter {
 	}
 
 	/**
+	 * Returns an options object from an argument array
+	 * Use this for options in a node-back style function
+	 *
+	 * function(someArg, options, callback)
+	 *      let args = Array.prototype.slice.call(arguments);
+	 *      someArg = args.shift();
+	 *      callback = args.pop();
+	 *      options = this._parseOptions(args);
+	 *
+	 * @param {Object[]} args
+	 * @returns {*|{}}
+	 * @private
+	 */
+	parseOptions(args) {
+		return (args.length > 0 ? args.shift() : {}) || {};
+	}
+
+	/**
 	 * Emit an event
 	 * @param {string} event
 	 * @param {string} caller
