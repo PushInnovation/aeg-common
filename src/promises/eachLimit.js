@@ -17,6 +17,8 @@ export default async function eachLimit (arr, limit, delegate) {
 
 				callback();
 
+				return null;
+
 			})
 			.catch((err) => {
 
