@@ -99,7 +99,7 @@ class Service extends Base {
 
 		} else {
 
-			if (this.stop) {
+			if (this._stop) {
 
 				this.info('start', {message: 'stopped', obj: {timeDiff}});
 
