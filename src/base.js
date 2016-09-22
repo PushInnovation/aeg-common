@@ -1,5 +1,3 @@
-'use strict';
-
 import {EventEmitter} from 'events';
 import _ from 'lodash';
 
@@ -12,13 +10,16 @@ class Base extends EventEmitter {
 	 * Constructor
 	 * @param {Object} options
 	 */
-	constructor(options = {}) {
+	constructor (options = {}) {
 
 		super();
 
 		if (options.logger) {
+
 			this._logger = options.logger;
+
 		}
+
 	}
 
 	/**
@@ -35,8 +36,10 @@ class Base extends EventEmitter {
 	 * @returns {*|{}}
 	 * @private
 	 */
-	parseOptions(args) {
+	parseOptions (args) {
+
 		return (args.length > 0 ? args.shift() : {}) || {};
+
 	}
 
 	/**
@@ -45,23 +48,30 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	emit(event, caller, options = {}) {
+	emit (event, caller, options = {}) {
 
 		const body = {};
 
 		if (options.message) {
+
 			body.message = `${_.camelCase(this.constructor.name)}#${caller}: ` + options.message;
+
 		}
 
 		if (options.data) {
+
 			body.data = options.data;
+
 		}
 
 		if (options.err) {
+
 			body.err = options.err;
+
 		}
 
 		super.emit(event, body);
+
 	}
 
 	/**
@@ -69,10 +79,14 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	debug(caller, options = {}) {
+	debug (caller, options = {}) {
+
 		if (this._logger) {
+
 			this._log(this._logger.debug, caller, options);
+
 		}
+
 	}
 
 	/**
@@ -80,10 +94,14 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	info(caller, options = {}) {
+	info (caller, options = {}) {
+
 		if (this._logger) {
+
 			this._log(this._logger.info, caller, options);
+
 		}
+
 	}
 
 	/**
@@ -91,10 +109,14 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	warn(caller, options = {}) {
+	warn (caller, options = {}) {
+
 		if (this._logger) {
+
 			this._log(this._logger.warn, caller, options);
+
 		}
+
 	}
 
 	/**
@@ -102,10 +124,14 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	error(caller, options = {}) {
+	error (caller, options = {}) {
+
 		if (this._logger) {
+
 			this._log(this._logger.error, caller, options);
+
 		}
+
 	}
 
 	/**
@@ -115,33 +141,52 @@ class Base extends EventEmitter {
 	 * @param {Object} options
 	 * @private
 	 */
-	_log(delegate, caller, options = {}) {
+	_log (delegate, caller, options = {}) {
 
 		if (!this._logger) {
+
 			return;
+
 		}
 
 		let logMessage;
 
 		if (options.message) {
+
 			logMessage = `${_.camelCase(this.constructor.name)}#${caller}: ${options.message}`;
+
 		} else {
+
 			logMessage = `${_.camelCase(this.constructor.name)}#${caller}`;
+
 		}
 
 		if (options.data) {
+
 			if (options.err) {
+
 				this._logger.errorWithMessage(logMessage, options.data, options.err);
+
 			} else {
+
 				delegate(logMessage, options.data);
+
 			}
+
 		} else {
+
 			if (!options.data && options.err) {
+
 				this._logger.errorWithMessage(logMessage, options.err);
+
 			} else {
+
 				delegate(logMessage);
+
 			}
+
 		}
+
 	}
 
 }

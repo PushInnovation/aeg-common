@@ -1,5 +1,3 @@
-'use strict';
-
 import Base from './base';
 import _ from 'lodash';
 
@@ -13,19 +11,22 @@ class BaseId extends Base {
 	 * @param {number} id
 	 * @param {Object} options
 	 */
-	constructor(id, options = {}) {
+	constructor (id, options = {}) {
 
 		super(options);
 
 		this._id = id;
+
 	}
 
 	/**
 	 * Get the id
 	 * @returns {*}
 	 */
-	get id() {
+	get id () {
+
 		return this._id;
+
 	}
 
 	/**
@@ -34,12 +35,14 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	emit(event, caller, options = {}) {
+	emit (event, caller, options = {}) {
+
 		const data = {};
 		data[_.camelCase(this.constructor.name)] = {};
 		data[_.camelCase(this.constructor.name)].id = this._id;
 		options.data = options.data ? _.extend(options.data, data) : data;
 		super.emit(event, caller, options);
+
 	}
 
 	/**
@@ -47,8 +50,10 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	debug(caller, options = {}) {
+	debug (caller, options = {}) {
+
 		super.debug(caller, this._resolveLogData(options));
+
 	}
 
 	/**
@@ -56,8 +61,10 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	info(caller, options = {}) {
+	info (caller, options = {}) {
+
 		super.info(caller, this._resolveLogData(options));
+
 	}
 
 	/**
@@ -65,8 +72,10 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	warn(caller, options = {}) {
+	warn (caller, options = {}) {
+
 		super.warn(caller, this._resolveLogData(options));
+
 	}
 
 	/**
@@ -74,8 +83,10 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {Object} options
 	 */
-	error(caller, options = {}) {
+	error (caller, options = {}) {
+
 		super.error(caller, this._resolveLogData(options));
+
 	}
 
 	/**
@@ -84,15 +95,21 @@ class BaseId extends Base {
 	 * @returns {*}
 	 * @private
 	 */
-	_resolveLogData(options) {
+	_resolveLogData (options) {
+
 		const data = {id: this._id};
 		if (options.data) {
+
 			delete options.data.id;
 			options.data = _.extend(data, options.data);
+
 		} else {
+
 			options.data = data;
+
 		}
 		return options;
+
 	}
 }
 

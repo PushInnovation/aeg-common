@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 /**
  * Basic service
  */
-class Service {
+class Service extends Base {
 
 	/**
 	 * Constructor
@@ -13,16 +13,9 @@ class Service {
 
 		options = options || {};
 
-		this._name = this.constructor.name;
+		super(options);
+
 		this._productionOnly = options.productionOnly;
-		this._logger = options.logger || {
-				debug: () => {
-				}, info: () => {
-				}, warn: () => {
-				}, error: () => {
-				}, errorWithMessage: () => {
-				}
-			};
 		this._initialized = false;
 		this._running = false;
 		this._stop = false;
@@ -61,14 +54,14 @@ class Service {
 
 		if (this._productionOnly && process.env.NODE_ENV !== 'production') {
 
-			this._warn('start', {message: 'skipping, production only'});
+			this.warn('start', {message: 'skipping, production only'});
 			return;
 
 		}
 
 		if (this._running) {
 
-			this._info('start', {message: 'already running'});
+			this.info('start', {message: 'already running'});
 			return;
 
 		}
@@ -76,7 +69,7 @@ class Service {
 		this._running = true;
 		this._stop = false;
 
-		this._info('start', {message: 'start'});
+		this.info('start', {message: 'start'});
 
 		let startTime = moment.tz('UTC');
 		let lastEx;
@@ -99,19 +92,19 @@ class Service {
 
 		if (lastEx && lastEx.code !== 'STOP') {
 
-			this._error('start', {obj: {timeDiff}, lastEx});
+			this.error('start', {obj: {timeDiff}, err: lastEx});
 
 			throw lastEx;
 
 		} else {
 
-			if (this._stop) {
+			if (this.stop) {
 
-				this._info('start', {message: 'stopped', obj: {timeDiff}});
+				this.info('start', {message: 'stopped', obj: {timeDiff}});
 
 			} else {
 
-				this._info('start', {message: 'complete', obj: {timeDiff}});
+				this.info('start', {message: 'complete', obj: {timeDiff}});
 
 			}
 
@@ -133,7 +126,7 @@ class Service {
 	 */
 	async stop () {
 
-		this._info('stop');
+		this.info('stop');
 		this._stop = true;
 		return this._serviceStopped();
 
@@ -166,105 +159,6 @@ class Service {
 	 * @private
 	 */
 	async _serviceDisposed () {
-
-	}
-
-	/**
-	 * Log debug
-	 * @param {string} method
-	 * @param {Object} [options]
-	 * @private
-	 */
-	_debug (method, options) {
-
-		this._log(this._logger.debug, method, options);
-
-	}
-
-	/**
-	 * Log info
-	 * @param {string} method
-	 * @param {Object} [options]
-	 * @private
-	 */
-	_info (method, options) {
-
-		this._log(this._logger.info, method, options);
-
-	}
-
-	/**
-	 * Log warn
-	 * @param {string} method
-	 * @param {Object} [options]
-	 * @private
-	 */
-	_warn (method, options) {
-
-		this._log(this._logger.warn, method, options);
-
-	}
-
-	/**
-	 * Log error
-	 * @param {string} method
-	 * @param {Object} [options]
-	 * @private
-	 */
-	_error (method, options) {
-
-		this._log(this._logger, method, options);
-
-	}
-
-	/**
-	 * Log internal
-	 * @param {function} delegate
-	 * @param {string} method
-	 * @param {Object} [options]
-	 * @private
-	 */
-	_log (delegate, method, options) {
-
-		options = options || {};
-
-		let logMessage;
-
-		if (options.message) {
-
-			logMessage = `${this._name}#${method}:${options.message}`;
-
-		} else {
-
-			logMessage = `${this._name}#${method}`;
-
-		}
-
-		if (options.obj) {
-
-			if (options.err) {
-
-				this._logger.errorWithMessage(logMessage, options.obj, options.err);
-
-			} else {
-
-				delegate(logMessage, options.obj);
-
-			}
-
-		} else {
-
-			if ((!options.obj && options.err)) {
-
-				this._logger.errorWithMessage(logMessage, options.err);
-
-			} else {
-
-				delegate(logMessage);
-
-			}
-
-		}
 
 	}
 
