@@ -1,3 +1,4 @@
+import Base from './base';
 import moment from 'moment-timezone';
 
 /**
