@@ -93,7 +93,7 @@ class Service extends Base {
 
 		if (lastEx && lastEx.code !== 'STOP') {
 
-			this.error('start', {obj: {timeDiff}, err: lastEx});
+			this.error('start', {data: {timeDiff}, err: lastEx});
 
 			throw lastEx;
 
@@ -101,11 +101,11 @@ class Service extends Base {
 
 			if (this._stop) {
 
-				this.info('start', {message: 'stopped', obj: {timeDiff}});
+				this.info('start', {message: 'stopped', data: {timeDiff}});
 
 			} else {
 
-				this.info('start', {message: 'complete', obj: {timeDiff}});
+				this.info('start', {message: 'complete', data: {timeDiff}});
 
 			}
 
