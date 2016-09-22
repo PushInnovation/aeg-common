@@ -142,6 +142,26 @@ class Service extends Base {
 	}
 
 	/**
+	 * Runs a delegate if the service is not stopped
+	 * @param delegate
+	 */
+	async checkStopped (delegate) {
+
+		if (!this._stop) {
+
+			return delegate();
+
+		} else {
+
+			const stop = new Error('STOP');
+			stop.code = 'STOP';
+			throw stop;
+
+		}
+
+	}
+
+	/**
 	 * Dispose
 	 */
 	async dispose () {
