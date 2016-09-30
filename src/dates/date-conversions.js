@@ -146,9 +146,9 @@ export default function (interval, timezone, options) {
 
 	return {
 		startDate: startDateClient.tz('UTC'),
-		startDateString: startDateClient.tz('UTC').format(Constants.dateTimeFormat),
+		startDateString: startDateClient.tz('UTC').format(dateFormatString),
 		endDate: endDateClient.tz('UTC'),
-		endDateString: endDateClient.tz('UTC').format(Constants.dateTimeFormat)
+		endDateString: endDateClient.tz('UTC').format(dateFormatString)
 	};
 
 }
