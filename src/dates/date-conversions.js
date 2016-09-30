@@ -10,7 +10,8 @@ export default {
 	stringToMoment,
 	utcStringToMoment,
 	unixTimestampToUTCString,
-	utcStringToUnixTimestamp
+	utcStringToUnixTimestamp,
+	resolveUTCIntervals
 };
 
 /**
