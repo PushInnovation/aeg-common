@@ -1,4 +1,4 @@
-import eachLimit from '../../src/promises/eachLimit';
+import eachLimit from '../../src/promises/each-limit';
 import Promise from 'bluebird';
 import should from 'should';
 
