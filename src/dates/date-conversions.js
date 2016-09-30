@@ -99,7 +99,7 @@ export function utcStringToUnixTimestamp (utc) {
  * @param {Object} [options] - moment: the date time to resolve, otherwise now
  * @returns {{startDate: *, endDate: *}}
  */
-export default function (interval, timezone, options) {
+export function resolveUTCIntervals (interval, timezone, options) {
 
 	let startDateClient, endDateClient, m;
 
