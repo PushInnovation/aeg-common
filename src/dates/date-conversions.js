@@ -1,8 +1,9 @@
 import moment from 'moment-timezone';
 
-const DATE_FORMAT_STRING = 'YYYY-MM-DD HH:mm:ss';
+export const dateFormatString = 'YYYY-MM-DD HH:mm:ss';
 
 export default {
+	dateFormatString,
 	convertUTCStringToESTString,
 	convertESTStringToUTCString,
 	momentToString,
@@ -19,7 +20,7 @@ export default {
  */
 export function convertUTCStringToESTString (utc) {
 
-	return moment.tz(utc, DATE_FORMAT_STRING, 'UTC').tz('America/New_York').format(DATE_FORMAT_STRING);
+	return moment.tz(utc, dateFormatString, 'UTC').tz('America/New_York').format(dateFormatString);
 
 }
 
@@ -31,8 +32,8 @@ export function convertUTCStringToESTString (utc) {
  */
 export function convertESTStringToUTCString (est, format) {
 
-	const f = format || DATE_FORMAT_STRING;
-	return moment.tz(est, f, 'America/New_York').tz('UTC').format(DATE_FORMAT_STRING);
+	const f = format || dateFormatString;
+	return moment.tz(est, f, 'America/New_York').tz('UTC').format(dateFormatString);
 
 }
 
@@ -43,7 +44,7 @@ export function convertESTStringToUTCString (est, format) {
  */
 export function momentToString (moment) {
 
-	return moment.format(DATE_FORMAT_STRING);
+	return moment.format(dateFormatString);
 
 }
 
@@ -54,7 +55,7 @@ export function momentToString (moment) {
  */
 export function stringToMoment (str) {
 
-	return moment(str, DATE_FORMAT_STRING);
+	return moment(str, dateFormatString);
 
 }
 
@@ -65,7 +66,7 @@ export function stringToMoment (str) {
  */
 export function utcStringToMoment (utc) {
 
-	return moment.tz(utc, DATE_FORMAT_STRING, 'UTC');
+	return moment.tz(utc, dateFormatString, 'UTC');
 
 }
 
@@ -76,7 +77,7 @@ export function utcStringToMoment (utc) {
  */
 export function unixTimestampToUTCString (timestamp) {
 
-	return moment.tz(timestamp, 'X', 'UTC').format(DATE_FORMAT_STRING);
+	return moment.tz(timestamp, 'X', 'UTC').format(dateFormatString);
 
 }
 
