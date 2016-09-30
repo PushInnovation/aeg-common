@@ -1,5 +1,13 @@
 import moment from 'moment-timezone';
 
+// start of week is Monday
+moment.updateLocale('en', {
+	week: {
+		dow: 1,
+		doy: 4
+	}
+});
+
 export const dateFormatString = 'YYYY-MM-DD HH:mm:ss';
 
 export default {
