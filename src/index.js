@@ -3,7 +3,7 @@ import BaseId from './base-id';
 import Service from './service';
 import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
-import eachLimit from './promises/eachLimit';
+import eachLimit from './promises/each-limit';
 
 const DateConversions = dateConversions;
 
