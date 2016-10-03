@@ -132,16 +132,16 @@ export function resolveUTCIntervals (interval, timezone, options) {
 			endDateClient = m.clone().endOf('day');
 			break;
 		case 'yesterday':
-			startDateClient = m.clone().subtract('days', 1).startOf('day');
-			endDateClient = m.clone().subtract('days', 1).endOf('day');
+			startDateClient = m.clone().subtract(1, 'days').startOf('day');
+			endDateClient = m.clone().subtract(1, 'days').endOf('day');
 			break;
 		case 'weekly':
 			startDateClient = m.clone().startOf('week');
 			endDateClient = m.clone().endOf('week');
 			break;
 		case 'last-week':
-			startDateClient = m.clone().subtract('days', 7).startOf('week');
-			endDateClient = m.clone().subtract('days', 7).endOf('week');
+			startDateClient = m.clone().subtract(7, 'days').startOf('week');
+			endDateClient = m.clone().subtract(7, 'days').endOf('week');
 			break;
 		case 'monthly':
 			startDateClient = m.clone().startOf('month');
