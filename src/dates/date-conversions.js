@@ -161,7 +161,6 @@ export function resolveUTCIntervals (interval, timezone, options) {
 			break;
 		default:
 			throw new Error(`Interval not valid ${interval}`);
-			break;
 	}
 
 	return {

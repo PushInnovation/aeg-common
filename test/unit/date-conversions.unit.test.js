@@ -84,7 +84,7 @@ describe('dateConversions', async () => {
 
 		} catch (ex) {
 
-			//expected
+			// expected
 
 		}
 
