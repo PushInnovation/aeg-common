@@ -123,9 +123,17 @@ export function resolveUTCIntervals (interval, timezone, options) {
 	}
 
 	switch (interval) {
+		case 'minutely':
+			startDateClient = m.clone().startOf('minute');
+			endDateClient = m.clone().endOf('minute');
+			break;
 		case 'hourly':
 			startDateClient = m.clone().startOf('hour');
 			endDateClient = m.clone().endOf('hour');
+			break;
+		case 'last-hour':
+			startDateClient = m.clone().subtract(1, 'hours').startOf('hour');
+			endDateClient = m.clone().subtract(1, 'hours').endOf('hour');
 			break;
 		case 'daily':
 			startDateClient = m.clone().startOf('day');
@@ -150,6 +158,9 @@ export function resolveUTCIntervals (interval, timezone, options) {
 		case 'yearly':
 			startDateClient = m.clone().startOf('year');
 			endDateClient = m.clone().endOf('year');
+			break;
+		default:
+			throw new Error(`Interval not valid ${interval}`);
 			break;
 	}
 
