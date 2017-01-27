@@ -1,4 +1,6 @@
-import { EventEmitter } from 'events';
+// @flow
+
+import EventEmitter from 'events';
 import Promise from 'bluebird';
 
 /**
@@ -8,13 +10,13 @@ import Promise from 'bluebird';
  * @param {function} delegate
  * @returns {Promise.<*>}
  */
-export default async function retryWhilst (retries, delay, delegate) {
+export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>): Promise<EventEmitter> {
 
-	const emitter = new EventEmitter();
+	const emitter: EventEmitter = new EventEmitter();
 
-	let tries = 0;
-	let done = false;
-	let lastErr = null;
+	let tries: number = 0;
+	let done: boolean = false;
+	let lastErr: ?Error = null;
 
 	while (tries < retries && !done) {
 
@@ -53,7 +55,14 @@ export default async function retryWhilst (retries, delay, delegate) {
  */
 class RetryWhilstError extends Error {
 
-	constructor (message, err) {
+	_innerError: ?Error;
+
+	/**
+	 * Constructor
+	 * @param {string} message
+	 * @param {Error} err
+	 */
+	constructor (message: string, err: ?Error) {
 
 		super();
 
