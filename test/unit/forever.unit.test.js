@@ -1,7 +1,7 @@
 import forever from '../../src/promises/forever';
 import Promise from 'bluebird';
 
-describe('while', async () => {
+describe('forever', async () => {
 
 	it('should not error', async () => {
 
