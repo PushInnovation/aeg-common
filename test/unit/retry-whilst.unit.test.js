@@ -1,6 +1,7 @@
 import retryWhilst from '../../src/promises/retry-whilst';
 import should from 'should';
 import moment from 'moment-timezone';
+import EventEmitter from 'events';
 
 describe('retryWhilst', async () => {
 
@@ -27,12 +28,20 @@ describe('retryWhilst', async () => {
 
 		try {
 
+			const emitter = new EventEmitter();
+
+			emitter.on('warn', (data) => {
+
+				console.log(data);
+
+			});
+
 			await retryWhilst(3, 1000, async () => {
 
 				attempts++;
 				throw new Error('Fail');
 
-			});
+			}, emitter);
 
 		} catch (ex) {
 

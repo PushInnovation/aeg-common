@@ -8,11 +8,10 @@ import Promise from 'bluebird';
  * @param {number} retries
  * @param {number} delay
  * @param {function} delegate
+ * @param {?EventEmitter} [emitter]
  * @returns {Promise.<*>}
  */
-export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>): Promise<EventEmitter> {
-
-	const emitter: EventEmitter = new EventEmitter();
+export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>, emitter: ?EventEmitter): Promise<EventEmitter> {
 
 	let tries: number = 0;
 	let done: boolean = false;
@@ -30,7 +29,11 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 			lastErr = ex;
 
-			emitter.emit('warn', {message: 'Attempt failed', attempt: tries + 1, of: retries, err: ex});
+			if (emitter) {
+
+				emitter.emit('warn', {message: 'Attempt failed', attempt: tries + 1, of: retries, err: ex});
+
+			}
 
 		}
 
@@ -45,8 +48,6 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 		throw new RetryWhilstError('retry whilst failed to complete', lastErr);
 
 	}
-
-	return emitter;
 
 }
 
