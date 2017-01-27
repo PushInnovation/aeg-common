@@ -1,3 +1,6 @@
+
+
+import ILogger from './flow-typed/i-logger';
 import Base from './base';
 import moment from 'moment-timezone';
 
@@ -6,11 +9,16 @@ import moment from 'moment-timezone';
  */
 class Service extends Base {
 
+	_productionOnly: boolean;
+	_initialized: boolean;
+	_running: boolean;
+	_stop: boolean;
+
 	/**
 	 * Constructor
 	 * @param {{productionOnly: boolean, logger: Object}} [options]
 	 */
-	constructor (options) {
+	constructor (options: {logger?: ILogger} = {}): void {
 
 		options = options || {};
 
@@ -26,7 +34,7 @@ class Service extends Base {
 	/**
 	 * Initialize
 	 */
-	async init () {
+	async init (): void {
 
 		if (!this._initialized) {
 
@@ -41,7 +49,7 @@ class Service extends Base {
 	 * Initialized - override
 	 * @private
 	 */
-	async _serviceInitialized () {
+	async _serviceInitialized (): void {
 
 	}
 
@@ -49,9 +57,7 @@ class Service extends Base {
 	 * Start the service
 	 * @param {Object} [options]
 	 */
-	async start (options) {
-
-		options = options || {};
+	async start (options: ?Object = {}): void {
 
 		if (this._productionOnly && process.env.NODE_ENV !== 'production') {
 
