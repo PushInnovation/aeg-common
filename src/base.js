@@ -1,4 +1,8 @@
-import {EventEmitter} from 'events';
+// @flow
+
+import type { ILogger } from './flow-typed/i-logger';
+import type { ILoggerOptions } from './flow-typed/i-logger-options';
+import EventEmitter from 'events';
 import _ from 'lodash';
 
 /**
@@ -6,11 +10,13 @@ import _ from 'lodash';
  */
 class Base extends EventEmitter {
 
+	_logger: ILogger;
+
 	/**
 	 * Constructor
 	 * @param {Object} options
 	 */
-	constructor (options = {}) {
+	constructor (options: {logger?: ILogger} = {}): void {
 
 		super();
 
@@ -36,7 +42,7 @@ class Base extends EventEmitter {
 	 * @returns {*|{}}
 	 * @private
 	 */
-	parseOptions (args) {
+	parseOptions (args: Object[]): Object {
 
 		return (args.length > 0 ? args.shift() : {}) || {};
 
@@ -46,15 +52,17 @@ class Base extends EventEmitter {
 	 * Emit an event
 	 * @param {string} event
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 */
-	emit (event, caller, options = {}) {
+	emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
 
 		const body = {};
 
+		body.message = `${_.camelCase(this.constructor.name)}#${caller}`;
+
 		if (options.message) {
 
-			body.message = `${_.camelCase(this.constructor.name)}#${caller}: ` + options.message;
+			body.message += `: ${options.message}`;
 
 		}
 
@@ -70,16 +78,16 @@ class Base extends EventEmitter {
 
 		}
 
-		super.emit(event, body);
+		return super.emit(event, body);
 
 	}
 
 	/**
 	 * Log debug
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 */
-	debug (caller, options = {}) {
+	debug (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -92,9 +100,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log info
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 */
-	info (caller, options = {}) {
+	info (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -107,9 +115,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log warn
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 */
-	warn (caller, options = {}) {
+	warn (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -122,9 +130,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log error
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 */
-	error (caller, options = {}) {
+	error (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -138,10 +146,10 @@ class Base extends EventEmitter {
 	 * Internal log handler
 	 * @param {function} delegate
 	 * @param {string} caller
-	 * @param {Object} options
+	 * @param {ILoggerOptions} options
 	 * @private
 	 */
-	_log (delegate, caller, options = {}) {
+	_log (delegate: (message: string, data: ?Object) => void, caller: string, options: ILoggerOptions = {}): void {
 
 		if (!this._logger) {
 
@@ -149,15 +157,11 @@ class Base extends EventEmitter {
 
 		}
 
-		let logMessage;
+		let logMessage = `${_.camelCase(this.constructor.name)}#${caller}`;
 
 		if (options.message) {
 
-			logMessage = `${_.camelCase(this.constructor.name)}#${caller}: ${options.message}`;
-
-		} else {
-
-			logMessage = `${_.camelCase(this.constructor.name)}#${caller}`;
+			logMessage += `: ${options.message}`;
 
 		}
 
