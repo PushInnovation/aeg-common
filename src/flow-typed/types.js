@@ -1,6 +1,6 @@
 // @flow
 
-export type ILogger = {
+export type LoggerType = {
 
 	debug(message: string, data: ?Object): void;
 
@@ -11,5 +11,13 @@ export type ILogger = {
 	error(message: string, data: ?Object): void;
 
 	errorWithMessage(message: string, data: ?Object | Error, err: ?Error): void;
+
+}
+
+export type LoggerOptionsType = {
+
+	message?: string,
+	data?: Object,
+	err?: Error
 
 }

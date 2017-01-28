@@ -1,7 +1,6 @@
 // @flow
 
-import type { ILogger } from './flow-typed/i-logger';
-import type { ILoggerOptions } from './flow-typed/i-logger-options';
+import type { LoggerType, LoggerOptionsType } from './flow-typed/types';
 import EventEmitter from 'events';
 import _ from 'lodash';
 
@@ -10,13 +9,13 @@ import _ from 'lodash';
  */
 class Base extends EventEmitter {
 
-	_logger: ILogger;
+	_logger: LoggerType;
 
 	/**
 	 * Constructor
 	 * @param {Object} options
 	 */
-	constructor (options: {logger?: ILogger} = {}): void {
+	constructor (options: {logger?: LoggerType} = {}): void {
 
 		super();
 
@@ -54,7 +53,7 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
+	emit (event: string, caller: string, options: LoggerOptionsType = {}): boolean {
 
 		const body = {};
 
@@ -87,7 +86,7 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	debug (caller: string, options: ILoggerOptions = {}): void {
+	debug (caller: string, options: LoggerOptionsType = {}): void {
 
 		if (this._logger) {
 
@@ -102,7 +101,7 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	info (caller: string, options: ILoggerOptions = {}): void {
+	info (caller: string, options: LoggerOptionsType = {}): void {
 
 		if (this._logger) {
 
@@ -117,7 +116,7 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	warn (caller: string, options: ILoggerOptions = {}): void {
+	warn (caller: string, options: LoggerOptionsType = {}): void {
 
 		if (this._logger) {
 
@@ -132,7 +131,7 @@ class Base extends EventEmitter {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	error (caller: string, options: ILoggerOptions = {}): void {
+	error (caller: string, options: LoggerOptionsType = {}): void {
 
 		if (this._logger) {
 
@@ -149,7 +148,7 @@ class Base extends EventEmitter {
 	 * @param {ILoggerOptions} options
 	 * @private
 	 */
-	_log (delegate: (message: string, data: ?Object) => void, caller: string, options: ILoggerOptions = {}): void {
+	_log (delegate: (message: string, data: ?Object) => void, caller: string, options: LoggerOptionsType = {}): void {
 
 		if (!this._logger) {
 
