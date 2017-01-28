@@ -1,6 +1,6 @@
 // @flow
 
-import type { ILogger } from './flow-typed/i-logger';
+import type { LoggerType } from './flow-typed/types';
 import Base from './base';
 import moment from 'moment-timezone';
 import ServiceStoppedError from './errors/service-stopped-error';
@@ -19,7 +19,7 @@ class Service extends Base {
 	 * Constructor
 	 * @param {{productionOnly: boolean, logger: Object}} [options]
 	 */
-	constructor (options: {logger?: ILogger, productionOnly?: boolean} = {}): void {
+	constructor (options: {logger?: LoggerType, productionOnly?: boolean} = {}): void {
 
 		options = options || {};
 
