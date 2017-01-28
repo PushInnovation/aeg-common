@@ -1,3 +1,5 @@
+// @flow
+
 import Base from './base';
 import BaseId from './base-id';
 import Service from './service';

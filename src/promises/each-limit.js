@@ -1,3 +1,5 @@
+// @flow
+
 import async from 'async';
 import Promise from 'bluebird';
 
@@ -7,10 +9,10 @@ import Promise from 'bluebird';
  * @param {number} limit
  * @param {Function} delegate
  */
-export default async function eachLimit (arr, limit, delegate) {
+export default async function eachLimit<T> (arr: T[], limit: number, delegate: (value: T) => ?Promise<void>): Promise<void> {
 
-	const eachLimit = Promise.promisify(async.eachLimit, {context: async});
-	return eachLimit(arr, limit, (value, callback) => {
+	const el: () => Promise<void> = Promise.promisify(async.eachLimit, {context: async});
+	return el(arr, limit, (value, callback) => {
 
 		Promise.resolve(delegate(value))
 			.then(() => {
