@@ -1,8 +1,9 @@
+// @flow
 
-
-import ILogger from './flow-typed/i-logger';
+import type { ILogger } from './flow-typed/i-logger';
 import Base from './base';
 import moment from 'moment-timezone';
+import ServiceStoppedError from './errors/service-stopped-error';
 
 /**
  * Basic service
@@ -18,13 +19,13 @@ class Service extends Base {
 	 * Constructor
 	 * @param {{productionOnly: boolean, logger: Object}} [options]
 	 */
-	constructor (options: {logger?: ILogger} = {}): void {
+	constructor (options: {logger?: ILogger, productionOnly?: boolean} = {}): void {
 
 		options = options || {};
 
 		super(options);
 
-		this._productionOnly = options.productionOnly;
+		this._productionOnly = options.productionOnly || false;
 		this._initialized = false;
 		this._running = false;
 		this._stop = false;
@@ -34,7 +35,7 @@ class Service extends Base {
 	/**
 	 * Initialize
 	 */
-	async init (): void {
+	async init (): Promise<void> {
 
 		if (!this._initialized) {
 
@@ -49,7 +50,7 @@ class Service extends Base {
 	 * Initialized - override
 	 * @private
 	 */
-	async _serviceInitialized (): void {
+	async _serviceInitialized (): Promise<void> {
 
 	}
 
@@ -57,7 +58,7 @@ class Service extends Base {
 	 * Start the service
 	 * @param {Object} [options]
 	 */
-	async start (options: ?Object = {}): void {
+	async start (options: ?Object = {}): Promise<void> {
 
 		if (this._productionOnly && process.env.NODE_ENV !== 'production') {
 
@@ -124,14 +125,14 @@ class Service extends Base {
 	 * @param {Object} [options]
 	 * @private
 	 */
-	async _serviceStarted (options) {
+	async _serviceStarted (options: ?Object): Promise<void> {
 
 	}
 
 	/**
 	 * Stop the service
 	 */
-	async stop () {
+	async stop (): Promise<void> {
 
 		this.info('stop');
 		this._stop = true;
@@ -143,7 +144,7 @@ class Service extends Base {
 	 * Service stopped - override
 	 * @private
 	 */
-	async _serviceStopped () {
+	async _serviceStopped (): Promise<void> {
 
 	}
 
@@ -151,7 +152,7 @@ class Service extends Base {
 	 * Runs a delegate if the service is not stopped
 	 * @param delegate
 	 */
-	async checkStopped (delegate) {
+	async checkStopped (delegate: () => Promise<void>): Promise<void> {
 
 		if (!this._stop) {
 
@@ -159,9 +160,7 @@ class Service extends Base {
 
 		} else {
 
-			const stop = new Error('STOP');
-			stop.code = 'STOP';
-			throw stop;
+			throw new ServiceStoppedError();
 
 		}
 
@@ -170,7 +169,7 @@ class Service extends Base {
 	/**
 	 * Dispose
 	 */
-	async dispose () {
+	async dispose (): Promise<void> {
 
 		if (this._initialized) {
 
@@ -185,10 +184,11 @@ class Service extends Base {
 	 * Disposed - override
 	 * @private
 	 */
-	async _serviceDisposed () {
+	async _serviceDisposed (): Promise<void> {
 
 	}
 
 }
 
 export default Service;
+

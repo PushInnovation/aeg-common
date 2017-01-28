@@ -2,6 +2,7 @@
 
 import EventEmitter from 'events';
 import Promise from 'bluebird';
+import RetryWhilstError from '../errors/retry-whilst-error';
 
 /**
  * Retry a delegate function until it completes successfully or exhausts the available attempts
@@ -46,29 +47,6 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 	if (!done) {
 
 		throw new RetryWhilstError('retry whilst failed to complete', lastErr);
-
-	}
-
-}
-
-/**
- * Retry whilst error
- */
-class RetryWhilstError extends Error {
-
-	_innerError: ?Error;
-
-	/**
-	 * Constructor
-	 * @param {string} message
-	 * @param {Error} err
-	 */
-	constructor (message: string, err: ?Error) {
-
-		super();
-
-		this.message = message;
-		this._innerError = err;
 
 	}
 
