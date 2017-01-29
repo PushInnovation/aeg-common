@@ -12,17 +12,18 @@ import RetryWhilstError from '../errors/retry-whilst-error';
  * @param {?EventEmitter} [emitter]
  * @returns {Promise.<*>}
  */
-export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>, emitter: ?EventEmitter): Promise<EventEmitter> {
+export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>, emitter: ?EventEmitter): Promise<any> {
 
 	let tries: number = 0;
 	let done: boolean = false;
 	let lastErr: ?Error = null;
+	let result = null;
 
 	while (tries < retries && !done) {
 
 		try {
 
-			await Promise.resolve(delegate(tries + 1));
+			result = await Promise.resolve(delegate(tries + 1));
 
 			done = true;
 
@@ -49,5 +50,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 		throw new RetryWhilstError('retry whilst failed to complete', lastErr);
 
 	}
+
+	return result;
 
 }

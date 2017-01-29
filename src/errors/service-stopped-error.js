@@ -1,7 +1,7 @@
 /**
  * Service stopped error
  */
-export class ServiceStoppedError extends Error {
+export default class ServiceStoppedError extends Error {
 
 	_code: string;
 
