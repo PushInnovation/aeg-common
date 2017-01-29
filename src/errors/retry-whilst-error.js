@@ -1,7 +1,7 @@
 /**
  * Retry whilst error
  */
-export class RetryWhilstError extends Error {
+export default class RetryWhilstError extends Error {
 
 	_innerError: ?Error;
 

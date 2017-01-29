@@ -9,14 +9,40 @@ describe('retryWhilst', async () => {
 
 		let attempts = 0;
 
-		await retryWhilst(3, 1000, async (attempt) => {
+		const result = await retryWhilst(3, 1000, async (attempt) => {
 
 			attempts++;
 			attempt.should.be.equal(1);
 
+			return 'test';
+
 		});
 
 		attempts.should.be.equal(1);
+		result.should.be.equal('test');
+
+	});
+
+	it('should complete but fail once', async () => {
+
+		let attempts = 0;
+
+		const result = await retryWhilst(3, 1000, async () => {
+
+			attempts++;
+
+			if (attempts === 1) {
+
+				throw new Error('Fail');
+
+			}
+
+			return 'test';
+
+		});
+
+		attempts.should.be.equal(2);
+		result.should.be.equal('test');
 
 	});
 
