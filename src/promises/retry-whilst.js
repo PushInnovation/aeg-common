@@ -33,7 +33,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 			if (emitter) {
 
-				emitter.emit('warn', {message: 'Attempt failed', attempt: tries + 1, of: retries, err: ex});
+				emitter.emit('warn', {message: 'Attempt failed', data: {attempt: tries + 1, of: retries}, err: ex});
 
 			}
 
