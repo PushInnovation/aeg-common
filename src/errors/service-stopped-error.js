@@ -3,17 +3,26 @@
  */
 export class ServiceStoppedError extends Error {
 
-	code: string;
+	_code: string;
+
+	/**
+	 * Gets the error code
+	 * @returns {string}
+	 */
+	get code (): string {
+
+		return this._code;
+
+	}
 
 	/**
 	 * constructor
 	 */
 	constructor () {
 
-		super();
+		super('STOP');
 
-		this.message = 'STOP';
-		this.code = 'STOP';
+		this._code = 'STOP';
 
 	}
 
