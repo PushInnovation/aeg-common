@@ -39,9 +39,13 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 		}
 
-		await Promise.delay(delay);
+		if (!done) {
 
-		tries++;
+			await Promise.delay(delay);
+
+			tries++;
+
+		}
 
 	}
 
