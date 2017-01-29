@@ -2,3 +2,6 @@
 
 unsafe.enable_getters_and_setters=true
 module.use_strict=true
+
+[ignore]
+.*/node_modules/config-chain/test/broken.json
