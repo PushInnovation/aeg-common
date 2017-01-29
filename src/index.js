@@ -7,12 +7,13 @@ import Service from './service';
 import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
 import eachLimit from './promises/each-limit';
+import retryWhilst from './promises/retry-whilst';
 
 const Errors = {RetryWhilstError};
 
 const DateConversions = dateConversions;
 
-const ControlFlow = {forever, eachLimit};
+const ControlFlow = {forever, eachLimit, retryWhilst};
 
 export { Errors, Base, BaseId, Service, ControlFlow, DateConversions };
 
