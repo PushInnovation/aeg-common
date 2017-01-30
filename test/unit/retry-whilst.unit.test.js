@@ -1,4 +1,5 @@
 import retryWhilst from '../../src/promises/retry-whilst';
+import RetryWhilstCancelError from '../../src/errors/retry-whilst-cancel-error';
 import should from 'should';
 import moment from 'moment-timezone';
 import EventEmitter from 'events';
@@ -81,6 +82,31 @@ describe('retryWhilst', async () => {
 		should.exist(err);
 		const diff = end.diff(start, 'seconds');
 		diff.should.be.aboveOrEqual(3);
+
+	});
+
+	it('should cancel', async () => {
+
+		let attempts = 0;
+		let err = null;
+
+		try {
+
+			await retryWhilst(3, 1000, async () => {
+
+				attempts++;
+				throw new RetryWhilstCancelError();
+
+			});
+
+		} catch (ex) {
+
+			err = ex;
+
+		}
+
+		attempts.should.be.equal(1);
+		should.exist(err);
 
 	});
 
