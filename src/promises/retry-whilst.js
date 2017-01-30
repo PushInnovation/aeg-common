@@ -3,6 +3,7 @@
 import EventEmitter from 'events';
 import Promise from 'bluebird';
 import RetryWhilstError from '../errors/retry-whilst-error';
+import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
 
 /**
  * Retry a delegate function until it completes successfully or exhausts the available attempts
@@ -18,8 +19,9 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 	let done: boolean = false;
 	let lastErr: ?Error = null;
 	let result = null;
+	let cancelled = false;
 
-	while (tries < retries && !done) {
+	while (tries < retries && !done && !cancelled) {
 
 		try {
 
@@ -29,17 +31,25 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 		} catch (ex) {
 
-			lastErr = ex;
+			if (ex instanceof RetryWhilstCancelError) {
 
-			if (emitter) {
+				cancelled = true;
 
-				emitter.emit('warn', {message: 'Attempt failed', data: {attempt: tries + 1, of: retries}, err: ex});
+			} else {
+
+				lastErr = ex;
+
+				if (emitter) {
+
+					emitter.emit('warn', {message: 'Attempt failed', data: {attempt: tries + 1, of: retries}, err: ex});
+
+				}
 
 			}
 
 		}
 
-		if (!done) {
+		if (!done && !cancelled) {
 
 			await Promise.delay(delay);
 
@@ -49,7 +59,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 	}
 
-	if (!done) {
+	if (!done || cancelled) {
 
 		throw new RetryWhilstError('retry whilst failed to complete', lastErr);
 
