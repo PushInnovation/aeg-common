@@ -1,6 +1,5 @@
 // @flow
 
-import RetryWhilstError from './errors/retry-whilst-error';
 import RetryWhilstCancelError from './errors/retry-whilst-cancel-error';
 import Base from './base';
 import BaseId from './base-id';
@@ -10,7 +9,7 @@ import forever from './promises/forever';
 import eachLimit from './promises/each-limit';
 import retryWhilst from './promises/retry-whilst';
 
-const Errors = {RetryWhilstError, RetryWhilstCancelError};
+const Errors = {RetryWhilstCancelError};
 
 const DateConversions = dateConversions;
 
