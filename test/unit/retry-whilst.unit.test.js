@@ -107,7 +107,7 @@ describe('retryWhilst', async () => {
 
 		attempts.should.be.equal(1);
 		should.exist(err);
-		err.innerError.message.should.be.equal('Inner Error');
+		err.message.should.be.equal('Inner Error');
 
 	});
 
