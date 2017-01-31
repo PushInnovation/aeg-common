@@ -1,6 +1,6 @@
 {
   "name": "@adexchange/aeg-common",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Common classes",
   "main": "./lib/index.js",
   "author": "Justin Durham",
