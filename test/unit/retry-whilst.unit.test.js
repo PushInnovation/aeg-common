@@ -95,7 +95,7 @@ describe('retryWhilst', async () => {
 			await retryWhilst(3, 1000, async () => {
 
 				attempts++;
-				throw new RetryWhilstCancelError();
+				throw new RetryWhilstCancelError('something happened', new Error('Inner Error'));
 
 			});
 
@@ -107,6 +107,7 @@ describe('retryWhilst', async () => {
 
 		attempts.should.be.equal(1);
 		should.exist(err);
+		err.innerError.message.should.be.equal('Inner Error');
 
 	});
 
