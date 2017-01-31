@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * Service stopped error
  */
