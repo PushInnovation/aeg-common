@@ -85,7 +85,7 @@ describe('retryWhilst', async () => {
 
 	});
 
-	it('should cancel', async () => {
+	it('should cancel with inner error', async () => {
 
 		let attempts = 0;
 		let err = null;
@@ -108,6 +108,31 @@ describe('retryWhilst', async () => {
 		attempts.should.be.equal(1);
 		should.exist(err);
 		err.message.should.be.equal('Inner Error');
+
+	});
+
+	it('should cancel without inner error', async () => {
+
+		let attempts = 0;
+		let err = null;
+
+		try {
+
+			await retryWhilst(3, 1000, async () => {
+
+				attempts++;
+				throw new RetryWhilstCancelError('something happened');
+
+			});
+
+		} catch (ex) {
+
+			err = ex;
+
+		}
+
+		attempts.should.be.equal(1);
+		should.not.exist(err);
 
 	});
 
