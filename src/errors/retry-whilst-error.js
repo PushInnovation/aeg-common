@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * Retry whilst error
  */
@@ -9,7 +11,7 @@ export default class RetryWhilstError extends Error {
 	 * Returns the inner error
 	 * @returns {?Error}
 	 */
-	get innerError (): Error {
+	get innerError (): ?Error {
 
 		return this._innerError;
 
