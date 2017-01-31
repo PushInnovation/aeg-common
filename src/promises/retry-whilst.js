@@ -19,9 +19,8 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 	let done: boolean = false;
 	let lastErr: ?Error = null;
 	let result = null;
-	let cancelled = false;
 
-	while (tries < retries && !done && !cancelled) {
+	while (tries < retries && !done) {
 
 		try {
 
@@ -33,7 +32,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 			if (ex instanceof RetryWhilstCancelError) {
 
-				cancelled = true;
+				throw ex;
 
 			} else {
 
@@ -47,10 +46,6 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 			}
 
-		}
-
-		if (!done && !cancelled) {
-
 			await Promise.delay(delay);
 
 			tries++;
@@ -59,7 +54,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 	}
 
-	if (!done || cancelled) {
+	if (!done) {
 
 		throw new RetryWhilstError('retry whilst failed to complete', lastErr);
 
