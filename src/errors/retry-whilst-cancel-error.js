@@ -18,13 +18,13 @@ export default class RetryWhilstCancelError extends Error {
 	/**
 	 * Constructor
 	 * @param {string} message
-	 * @param {Error} err
+	 * @param {Error} innerError
 	 */
-	constructor (message: string, err: ?Error) {
+	constructor (message: string, innerError: ?Error) {
 
 		super(message);
 
-		this._innerError = err;
+		this._innerError = innerError;
 
 	}
 
