@@ -51,7 +51,7 @@ class Base extends EventEmitter {
 	 * Emit an event
 	 * @param {string} event
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 */
 	emit (event: string, caller: string, options: LoggerOptionsType = {}): boolean {
 
@@ -84,7 +84,7 @@ class Base extends EventEmitter {
 	/**
 	 * Log debug
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 */
 	debug (caller: string, options: LoggerOptionsType = {}): void {
 
@@ -99,7 +99,7 @@ class Base extends EventEmitter {
 	/**
 	 * Log info
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 */
 	info (caller: string, options: LoggerOptionsType = {}): void {
 
@@ -114,7 +114,7 @@ class Base extends EventEmitter {
 	/**
 	 * Log warn
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 */
 	warn (caller: string, options: LoggerOptionsType = {}): void {
 
@@ -129,7 +129,7 @@ class Base extends EventEmitter {
 	/**
 	 * Log error
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 */
 	error (caller: string, options: LoggerOptionsType = {}): void {
 
@@ -145,7 +145,7 @@ class Base extends EventEmitter {
 	 * Internal log handler
 	 * @param {function} delegate
 	 * @param {string} caller
-	 * @param {ILoggerOptions} options
+	 * @param {LoggerOptionsType} options
 	 * @private
 	 */
 	_log (delegate: (message: string, data: ?Object) => void, caller: string, options: LoggerOptionsType = {}): void {
