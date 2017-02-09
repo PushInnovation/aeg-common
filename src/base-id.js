@@ -9,14 +9,14 @@ import _ from 'lodash';
  */
 class BaseId extends Base {
 
-	_id: number;
+	_id: string;
 
 	/**
 	 * Constructor
-	 * @param {number} id
+	 * @param {string} id
 	 * @param {Object} options
 	 */
-	constructor (id: number, options: {logger?: LoggerType} = {}): void {
+	constructor (id: string, options: {logger?: LoggerType} = {}): void {
 
 		super(options);
 
@@ -28,7 +28,7 @@ class BaseId extends Base {
 	 * Get the id
 	 * @returns {*}
 	 */
-	get id (): number {
+	get id (): string {
 
 		return this._id;
 
