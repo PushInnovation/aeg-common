@@ -4,4 +4,4 @@ unsafe.enable_getters_and_setters=true
 module.use_strict=true
 
 [ignore]
-.*/lib/.*
+<PROJECT_ROOT>/lib/.*
