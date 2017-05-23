@@ -14,13 +14,13 @@ class Service extends Base {
 	_initialized: boolean;
 	_running: boolean;
 	_stop: boolean;
-	_version: object;
+	_version: ?Object;
 
 	/**
 	 * Constructor
 	 * @param {{productionOnly: boolean, logger: Object}} [options]
 	 */
-	constructor (options: {logger?: LoggerType, productionOnly?: boolean} = {}): void {
+	constructor (options: {logger?: LoggerType, productionOnly?: boolean, version?: Object} = {}): void {
 
 		options = options || {};
 
@@ -30,7 +30,7 @@ class Service extends Base {
 		this._initialized = false;
 		this._running = false;
 		this._stop = false;
-		this._version = options.version || null;
+		this._version = options.version;
 
 	}
 
