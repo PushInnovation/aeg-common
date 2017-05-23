@@ -14,6 +14,7 @@ class Service extends Base {
 	_initialized: boolean;
 	_running: boolean;
 	_stop: boolean;
+	_version: object;
 
 	/**
 	 * Constructor
@@ -29,6 +30,7 @@ class Service extends Base {
 		this._initialized = false;
 		this._running = false;
 		this._stop = false;
+		this._version = options.version || null;
 
 	}
 
@@ -77,7 +79,7 @@ class Service extends Base {
 		this._running = true;
 		this._stop = false;
 
-		this.info('start', {message: 'start'});
+		this.info('start', {message: 'starting'});
 
 		let startTime = moment.tz('UTC');
 		let lastEx;
@@ -96,7 +98,7 @@ class Service extends Base {
 		this._running = false;
 
 		const endTime = moment.tz('UTC');
-		const timeDiff = startTime.diff(endTime, 'minutes', true);
+		const timeDiff = endTime.diff(startTime, 'minutes', true);
 
 		if (lastEx && lastEx.code !== 'STOP') {
 
@@ -112,7 +114,7 @@ class Service extends Base {
 
 			} else {
 
-				this.info('start', {message: 'complete', data: {timeDiff}});
+				this.info('start', { message: 'started', data: { timeDiff: timeDiff, version: this._version } });
 
 			}
 
