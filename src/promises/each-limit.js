@@ -3,6 +3,9 @@
 import async from 'async';
 import Promise from 'bluebird';
 
+type CallbackType = (err: ?Error) => void;
+type DelegateType = (value: any, callback: CallbackType) => void;
+
 /**
  * Run an array of promises with a set concurrency limit
  * @param {Object[]} arr
@@ -11,7 +14,7 @@ import Promise from 'bluebird';
  */
 export default async function eachLimit<T> (arr: T[], limit: number, delegate: (value: T) => ?Promise<void>): Promise<void> {
 
-	const el: () => Promise<void> = Promise.promisify(async.eachLimit, {context: async});
+	const el: (arr: Array<any>, limit: number, DelegateType) => Promise<void> = Promise.promisify(async.eachLimit, {context: async});
 	return el(arr, limit, (value, callback) => {
 
 		Promise.resolve(delegate(value))
