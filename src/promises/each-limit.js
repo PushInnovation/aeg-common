@@ -11,7 +11,7 @@ import Promise from 'bluebird';
  */
 export default async function eachLimit<T> (arr: T[], limit: number, delegate: (value: T) => ?Promise<void>): Promise<void> {
 
-	const el: () => Promise<void> = Promise.promisify(async.eachLimit, {context: async});
+	const el = Promise.promisify(async.eachLimit, {context: async});
 	return el(arr, limit, (value, callback) => {
 
 		Promise.resolve(delegate(value))
