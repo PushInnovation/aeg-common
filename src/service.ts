@@ -1,6 +1,4 @@
-// @flow
-
-import type { LoggerType } from './flow-typed/types';
+import { LoggerType } from './flow-typed/types';
 import Base from './base';
 import moment from 'moment-timezone';
 import ServiceStoppedError from './errors/service-stopped-error';

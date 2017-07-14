@@ -1,6 +1,4 @@
-// @flow
-
-import type { LoggerType, LoggerOptionsType } from './flow-typed/types';
+import { LoggerType, LoggerOptionsType } from './flow-typed/types';
 import EventEmitter from 'events';
 import _ from 'lodash';
 

@@ -1,20 +1,18 @@
-// @flow
-
-import Promise from 'bluebird';
+import { Promise as BBPromise } from 'bluebird';
 
 /**
  * Run a promise over and over forever
  * @param {Function} delegate
  */
-export default async function forever (delegate: () => ?Promise<void>) {
+export default async function forever (delegate: () => BBPromise<void>) {
 
-	return Promise.coroutine(function* (delegate) {
+	return BBPromise.coroutine(function* (innerDelegate) {
 
 		let done: boolean = false;
 
 		while (!done) {
 
-			done = yield delegate();
+			done = yield innerDelegate();
 
 		}
 

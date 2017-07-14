@@ -1,7 +1,5 @@
-// @flow
-
-import EventEmitter from 'events';
-import Promise from 'bluebird';
+import * as EventEmitter from 'events';
+import { Promise as BBPromise } from 'bluebird';
 import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
 
 /**
@@ -14,13 +12,18 @@ import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
  * @param {?EventEmitter} [emitter]
  * @returns {Promise.<*>}
  */
-export default async function retryWhilst (retries: number, delay: number, delegate: (attempts: number) => Promise<void>, emitter: ?EventEmitter): Promise<any> {
+export default async function retryWhilst<T> (
+	retries: number,
+	delay: number,
+	delegate: (attempts: number) => Promise<T | null>,
+	emitter?: EventEmitter)
+	: Promise<T | null> {
 
 	let tries: number = 0;
 	let done: boolean = false;
-	let lastErr: ?Error = null;
+	let lastErr: Error | null = null;
 	let cancelled: boolean = false;
-	let result: ?Object = null;
+	let result: T | null = null;
 
 	while (tries < retries && !done && !cancelled) {
 
@@ -58,7 +61,7 @@ export default async function retryWhilst (retries: number, delay: number, deleg
 
 			if (!cancelled) {
 
-				await Promise.delay(delay);
+				await BBPromise.delay(delay);
 
 				tries++;
 

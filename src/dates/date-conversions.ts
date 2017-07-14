@@ -1,5 +1,3 @@
-// @flow
-
 import moment from 'moment-timezone';
 
 // start of week is Monday
@@ -53,9 +51,9 @@ export function convertESTStringToUTCString (est: string, format: string): strin
  * @param {Moment} moment
  * @return {string}
  */
-export function momentToString (moment: moment): string {
+export function momentToString (thisMoment: moment): string {
 
-	return moment.format(dateFormatString);
+	return thisMoment.format(dateFormatString);
 
 }
 
@@ -110,7 +108,8 @@ export function utcStringToUnixTimestamp (utc: string): number {
  * @param {Object} [options] - moment: the date time to resolve, otherwise now
  * @returns {{startDate: *, endDate: *}}
  */
-export function resolveUTCIntervals (interval: string, timezone: string, options: ?{moment: moment}): {startDate: moment, startDateString: string, endDate: moment, endDateString: string} {
+export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment: moment })
+	: { startDate: moment, startDateString: string, endDate: moment, endDateString: string } {
 
 	let startDateClient, endDateClient, m;
 

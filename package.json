@@ -19,6 +19,7 @@
     "patch": "git reset --hard HEAD && git clean -fd && npm run compile && npm version patch -m \"[ci skip] %s\" && git push origin master && git push origin master --tags && npm publish"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
     "@types/node": "^6.0.82",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",

@@ -1,6 +1,4 @@
-// @flow
-
-import type { LoggerType, LoggerOptionsType } from './flow-typed/types';
+import { LoggerType, LoggerOptionsType } from './flow-typed/types';
 import Base from './base';
 import _ from 'lodash';
 
