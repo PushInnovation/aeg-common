@@ -1,4 +1,4 @@
-import { Logger } from '@adexchange/aeg-logger';
+import { ILogger } from '@adexchange/aeg-logger';
 import Base from './base';
 import { ILoggerOptions } from './base';
 import * as _ from 'lodash';
@@ -15,7 +15,7 @@ export default class BaseId extends Base {
 	 * @param {string} id
 	 * @param {object} options
 	 */
-	constructor (id: string, options: {logger?: Logger} = {}) {
+	constructor (id: string, options: {logger?: ILogger} = {}) {
 
 		super(options);
 

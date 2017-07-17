@@ -1,4 +1,4 @@
-import { Logger } from '@adexchange/aeg-logger';
+import { ILogger } from '@adexchange/aeg-logger';
 import Base from './base';
 import moment from 'moment-timezone';
 import ServiceStoppedError from './errors/service-stopped-error';
@@ -24,7 +24,7 @@ export default class Service extends Base {
 	 * Constructor
 	 * @param {{productionOnly: boolean, logger: Object}} [options]
 	 */
-	constructor (options: {logger?: Logger, productionOnly?: boolean, version?: IServiceVersion} = {}) {
+	constructor (options: {logger?: ILogger, productionOnly?: boolean, version?: IServiceVersion} = {}) {
 
 		options = options || {};
 
