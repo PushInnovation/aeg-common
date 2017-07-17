@@ -1,21 +1,25 @@
-// @flow
-
-import type { LoggerType, LoggerOptionsType } from './flow-typed/types';
-import EventEmitter from 'events';
+import { Logger } from '@adexchange/aeg-logger';
+import * as EventEmitter from 'events';
 import _ from 'lodash';
+
+export interface ILoggerOptions {
+	message?: string;
+	data?: any;
+	err?: Error;
+}
 
 /**
  * Base class for common operations
  */
-class Base extends EventEmitter {
+export default class Base extends EventEmitter {
 
-	_logger: LoggerType;
+	private _logger: Logger;
 
 	/**
 	 * Constructor
-	 * @param {Object} options
+	 * @param {object} options
 	 */
-	constructor (options: {logger?: LoggerType} = {}): void {
+	constructor (options: {logger?: Logger} = {}) {
 
 		super();
 
@@ -37,11 +41,11 @@ class Base extends EventEmitter {
 	 *      callback = args.pop();
 	 *      options = this._parseOptions(args);
 	 *
-	 * @param {Object[]} args
+	 * @param {object[]} args
 	 * @returns {*|{}}
 	 * @private
 	 */
-	parseOptions (args: Object[]): Object {
+	public parseOptions (args: object[]): object {
 
 		return (args.length > 0 ? args.shift() : {}) || {};
 
@@ -51,11 +55,11 @@ class Base extends EventEmitter {
 	 * Emit an event
 	 * @param {string} event
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 */
-	emit (event: string, caller: string, options: LoggerOptionsType = {}): boolean {
+	public emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
 
-		const body = {};
+		const body: any = {};
 
 		body.message = `${_.camelCase(this.constructor.name)}#${caller}`;
 
@@ -84,9 +88,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log debug
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 */
-	debug (caller: string, options: LoggerOptionsType = {}): void {
+	public debug (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -99,9 +103,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log info
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 */
-	info (caller: string, options: LoggerOptionsType = {}): void {
+	public info (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -114,9 +118,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log warn
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 */
-	warn (caller: string, options: LoggerOptionsType = {}): void {
+	public warn (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -129,9 +133,9 @@ class Base extends EventEmitter {
 	/**
 	 * Log error
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 */
-	error (caller: string, options: LoggerOptionsType = {}): void {
+	public error (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
 
@@ -145,10 +149,10 @@ class Base extends EventEmitter {
 	 * Internal log handler
 	 * @param {function} delegate
 	 * @param {string} caller
-	 * @param {LoggerOptionsType} options
+	 * @param {ILoggerConfig} options
 	 * @private
 	 */
-	_log (delegate: (message: string, data: ?Object) => void, caller: string, options: LoggerOptionsType = {}): void {
+	private _log (delegate: (message: string, data?: object) => void, caller: string, options: ILoggerOptions = {}): void {
 
 		if (!this._logger) {
 
@@ -168,7 +172,7 @@ class Base extends EventEmitter {
 
 			if (options.err) {
 
-				this._logger.errorWithMessage(logMessage, options.data, options.err);
+				this._logger.error(logMessage, options.data, options.err);
 
 			} else {
 
@@ -180,7 +184,7 @@ class Base extends EventEmitter {
 
 			if (!options.data && options.err) {
 
-				this._logger.errorWithMessage(logMessage, options.err);
+				this._logger.error(logMessage, options.err);
 
 			} else {
 
@@ -193,5 +197,3 @@ class Base extends EventEmitter {
 	}
 
 }
-
-export default Base;

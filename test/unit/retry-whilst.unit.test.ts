@@ -1,16 +1,16 @@
 import retryWhilst from '../../src/promises/retry-whilst';
 import RetryWhilstCancelError from '../../src/errors/retry-whilst-cancel-error';
-import should from 'should';
-import moment from 'moment-timezone';
-import EventEmitter from 'events';
+import * as should from 'should';
+import * as moment from 'moment-timezone';
+import { EventEmitter } from 'events';
 
 describe('retryWhilst', async () => {
 
 	it('should complete', async () => {
 
-		let attempts = 0;
+		let attempts: any = 0;
 
-		const result = await retryWhilst(3, 1000, async (attempt) => {
+		const result: any = await retryWhilst(3, 1000, async (attempt: any) => {
 
 			attempts++;
 			attempt.should.be.equal(1);
@@ -26,9 +26,9 @@ describe('retryWhilst', async () => {
 
 	it('should complete but fail once', async () => {
 
-		let attempts = 0;
+		let attempts: any = 0;
 
-		const result = await retryWhilst(3, 1000, async () => {
+		const result: any = await retryWhilst(3, 1000, async () => {
 
 			attempts++;
 
@@ -49,8 +49,8 @@ describe('retryWhilst', async () => {
 
 	it('should not complete', async () => {
 
-		let start = moment.tz();
-		let attempts = 0;
+		const start = moment.tz();
+		let attempts: any = 0;
 		let err = null;
 
 		try {
@@ -59,7 +59,7 @@ describe('retryWhilst', async () => {
 
 			emitter.on('warn', (data) => {
 
-				console.log(data);
+				console.log(data); // tslint:disable-line
 
 			});
 
@@ -76,7 +76,7 @@ describe('retryWhilst', async () => {
 
 		}
 
-		let end = moment.tz();
+		const end = moment.tz();
 
 		attempts.should.be.equal(3);
 		should.exist(err);
@@ -87,7 +87,7 @@ describe('retryWhilst', async () => {
 
 	it('should cancel with inner error', async () => {
 
-		let attempts = 0;
+		let attempts: any = 0;
 		let err = null;
 
 		try {
@@ -107,13 +107,13 @@ describe('retryWhilst', async () => {
 
 		attempts.should.be.equal(1);
 		should.exist(err);
-		err.message.should.be.equal('Inner Error');
+		(err as any).message.should.be.equal('Inner Error');
 
 	});
 
 	it('should cancel without inner error', async () => {
 
-		let attempts = 0;
+		let attempts: any = 0;
 		let err = null;
 
 		try {

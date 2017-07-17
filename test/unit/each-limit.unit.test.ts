@@ -1,12 +1,12 @@
 import eachLimit from '../../src/promises/each-limit';
-import Promise from 'bluebird';
-import should from 'should';
+import { Promise as BBPromise } from 'bluebird';
+import * as should from 'should';
 
 describe('eachLimit', async () => {
 
 	it('should not error with promise', async () => {
 
-		let count = 0;
+		let count: any = 0;
 
 		await eachLimit([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, async (value) => {
 
@@ -14,7 +14,7 @@ describe('eachLimit', async () => {
 
 			count++;
 
-			return Promise.delay(100);
+			return BBPromise.delay(100);
 
 		});
 
@@ -24,7 +24,7 @@ describe('eachLimit', async () => {
 
 	it('should not error with static value', async () => {
 
-		let count = 0;
+		let count: any = 0;
 
 		await eachLimit([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2, async (value) => {
 
