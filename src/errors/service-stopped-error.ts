@@ -1,11 +1,9 @@
-// @flow
-
 /**
  * Service stopped error
  */
 export default class ServiceStoppedError extends Error {
 
-	_code: string;
+	private _code: string;
 
 	/**
 	 * Gets the error code
@@ -23,6 +21,9 @@ export default class ServiceStoppedError extends Error {
 	constructor () {
 
 		super('STOP');
+
+		// Remove this when we target es2015+
+		Object.setPrototypeOf(this, ServiceStoppedError.prototype);
 
 		this._code = 'STOP';
 

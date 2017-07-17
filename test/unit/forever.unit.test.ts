@@ -1,11 +1,11 @@
 import forever from '../../src/promises/forever';
-import Promise from 'bluebird';
+import { Promise as BBPromise } from 'bluebird';
 
 describe('forever', async () => {
 
 	it('should not error', async () => {
 
-		let cycles = 0;
+		let cycles: any = 0;
 
 		await forever(async () => {
 
@@ -17,7 +17,7 @@ describe('forever', async () => {
 
 			}
 
-			return Promise.delay(100);
+			return BBPromise.delay(100);
 
 		});
 
@@ -41,7 +41,7 @@ describe('forever', async () => {
 
 				}
 
-				return Promise.delay(500);
+				return BBPromise.delay(500);
 
 			});
 

@@ -1,14 +1,15 @@
 import { DateConversions } from '../../src/index';
-import moment from 'moment-timezone';
-import should from 'should';
+import * as moment from 'moment-timezone';
+import * as should from 'should';
+import 'mocha';
 
 describe('dateConversions', async () => {
 
 	it('should not error', async () => {
 
-		const result = DateConversions.momentToString(moment());
+		const result: any = DateConversions.momentToString(moment());
 		should.exist(result);
-		result.should.be.a.String;
+		result.should.be.a.String();
 
 	});
 
