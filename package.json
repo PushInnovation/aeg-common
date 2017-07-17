@@ -33,7 +33,7 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
-    "@adexchange/aeg-logger": "0.0.41",
+    "@adexchange/aeg-logger": "0.0.42",
     "async": "^2.1.5",
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.4.7",
