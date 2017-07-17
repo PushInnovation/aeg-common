@@ -1,4 +1,4 @@
-import { Logger } from '@adexchange/aeg-logger';
+import { ILogger } from '@adexchange/aeg-logger';
 import * as EventEmitter from 'events';
 import _ from 'lodash';
 
@@ -13,13 +13,13 @@ export interface ILoggerOptions {
  */
 export default class Base extends EventEmitter {
 
-	private _logger: Logger;
+	private _logger: ILogger;
 
 	/**
 	 * Constructor
 	 * @param {object} options
 	 */
-	constructor (options: {logger?: Logger} = {}) {
+	constructor (options: {logger?: ILogger} = {}) {
 
 		super();
 

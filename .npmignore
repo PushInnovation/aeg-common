@@ -1,1 +1,8 @@
 /src
+/test
+.idea
+.vscode
+circle.yml
+test-results.xml
+tsconfig.json
+tslint.json
