@@ -12,7 +12,7 @@
   "scripts": {
     "test": "mocha --recursive --compilers ts:ts-node/register test/**/*.ts",
     "test:coverage": "istanbul cover _mocha -- --recursive --compilers ts:ts-node/register test/**/*.ts",
-    "lint": "tslint **/*.ts",
+    "lint": "tslint src/**/*.ts",
     "lint:watch": "npm run lint && onchange \"**/*.ts\" \"tslint.json\" -- npm run lint",
     "compile": "tsc",
     "build": "npm run lint && npm run compile && istanbul cover _mocha -- --recursive --compilers ts:ts-node/register --reporter mocha-junit-reporter test/unit/**/*.ts",
@@ -32,6 +32,7 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
+    "@adexchange/aeg-logger": "0.0.38",
     "async": "^2.1.5",
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.4.7",

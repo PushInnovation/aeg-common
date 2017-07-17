@@ -1,8 +1,8 @@
 import retryWhilst from '../../src/promises/retry-whilst';
 import RetryWhilstCancelError from '../../src/errors/retry-whilst-cancel-error';
-import should from 'should';
-import moment from 'moment-timezone';
-import EventEmitter from 'events';
+import * as should from 'should';
+import * as moment from 'moment-timezone';
+import { EventEmitter } from 'events';
 
 describe('retryWhilst', async () => {
 
@@ -107,7 +107,7 @@ describe('retryWhilst', async () => {
 
 		attempts.should.be.equal(1);
 		should.exist(err);
-		err.message.should.be.equal('Inner Error');
+		(err as any).message.should.be.equal('Inner Error');
 
 	});
 

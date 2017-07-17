@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import * as moment from 'moment-timezone';
 
 // start of week is Monday
 moment.updateLocale('en', {

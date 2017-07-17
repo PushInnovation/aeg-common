@@ -1,20 +1,21 @@
-import { LoggerType, LoggerOptionsType } from './flow-typed/types';
+import { Logger } from '@adexchange/aeg-logger';
 import Base from './base';
+import { ILoggerOptions } from './base';
 import _ from 'lodash';
 
 /**
  * Base class with an id
  */
-class BaseId extends Base {
+export default class BaseId extends Base {
 
-	_id: string;
+	private _id: string;
 
 	/**
 	 * Constructor
 	 * @param {string} id
-	 * @param {Object} options
+	 * @param {object} options
 	 */
-	constructor (id: string, options: {logger?: LoggerType} = {}): void {
+	constructor (id: string, options: {logger?: Logger} = {}) {
 
 		super(options);
 
@@ -38,7 +39,7 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	emit (event: string, caller: string, options: LoggerOptionsType = {}): boolean {
+	public emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
 
 		const data = {};
 		data[_.camelCase(this.constructor.name)] = {};
@@ -53,7 +54,7 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	debug (caller: string, options: LoggerOptionsType = {}): void {
+	public debug (caller: string, options: ILoggerOptions = {}): void {
 
 		super.debug(caller, this._resolveLogData(options));
 
@@ -64,7 +65,7 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	info (caller: string, options: LoggerOptionsType = {}): void {
+	public info (caller: string, options: ILoggerOptions = {}): void {
 
 		super.info(caller, this._resolveLogData(options));
 
@@ -75,7 +76,7 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	warn (caller: string, options: LoggerOptionsType = {}): void {
+	public warn (caller: string, options: ILoggerOptions = {}): void {
 
 		super.warn(caller, this._resolveLogData(options));
 
@@ -86,7 +87,7 @@ class BaseId extends Base {
 	 * @param {string} caller
 	 * @param {ILoggerOptions} options
 	 */
-	error (caller: string, options: LoggerOptionsType = {}): void {
+	public error (caller: string, options: ILoggerOptions = {}): void {
 
 		super.error(caller, this._resolveLogData(options));
 
@@ -98,9 +99,9 @@ class BaseId extends Base {
 	 * @returns {*}
 	 * @private
 	 */
-	_resolveLogData (options: LoggerOptionsType = {}): LoggerOptionsType {
+	private _resolveLogData (options: ILoggerOptions = {}): ILoggerOptions {
 
-		const data: Object = {id: this._id};
+		const data = {id: this._id};
 
 		if (options.data) {
 
@@ -118,5 +119,3 @@ class BaseId extends Base {
 	}
 
 }
-
-export default BaseId;

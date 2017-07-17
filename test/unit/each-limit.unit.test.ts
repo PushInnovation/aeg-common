@@ -1,6 +1,6 @@
 import eachLimit from '../../src/promises/each-limit';
 import { Promise as BBPromise } from 'bluebird';
-import should from 'should';
+import * as should from 'should';
 
 describe('eachLimit', async () => {
 

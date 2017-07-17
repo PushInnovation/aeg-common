@@ -1,4 +1,4 @@
-import * as EventEmitter from 'events';
+import { EventEmitter } from 'events';
 import { Promise as BBPromise } from 'bluebird';
 import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
 

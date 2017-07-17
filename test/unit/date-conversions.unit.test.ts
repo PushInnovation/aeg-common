@@ -1,6 +1,6 @@
 import { DateConversions } from '../../src/index';
-import moment from 'moment-timezone';
-import should from 'should';
+import * as moment from 'moment-timezone';
+import * as should from 'should';
 import 'mocha';
 
 describe('dateConversions', async () => {
