@@ -94,7 +94,7 @@ export default class Base extends EventEmitter {
 
 		if (this._logger) {
 
-			this._log(this._logger.debug, caller, options);
+			this._log(this._logger.debug.bind(this), caller, options);
 
 		}
 
@@ -109,7 +109,7 @@ export default class Base extends EventEmitter {
 
 		if (this._logger) {
 
-			this._log(this._logger.info, caller, options);
+			this._log(this._logger.info.bind(this), caller, options);
 
 		}
 
@@ -124,7 +124,7 @@ export default class Base extends EventEmitter {
 
 		if (this._logger) {
 
-			this._log(this._logger.warn, caller, options);
+			this._log(this._logger.warn.bind(this), caller, options);
 
 		}
 
@@ -139,7 +139,7 @@ export default class Base extends EventEmitter {
 
 		if (this._logger) {
 
-			this._log(this._logger.error, caller, options);
+			this._log(this._logger.error.bind(this), caller, options);
 
 		}
 
