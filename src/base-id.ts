@@ -1,7 +1,7 @@
 import { Logger } from '@adexchange/aeg-logger';
 import Base from './base';
 import { ILoggerOptions } from './base';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 /**
  * Base class with an id
