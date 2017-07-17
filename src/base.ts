@@ -1,6 +1,6 @@
 import { ILogger } from '@adexchange/aeg-logger';
 import * as EventEmitter from 'events';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export interface ILoggerOptions {
 	message?: string;
