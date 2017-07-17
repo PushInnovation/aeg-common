@@ -39,6 +39,97 @@ export default class Service extends Base {
 	}
 
 	/**
+	 * Initialize
+	 */
+	public async init (): Promise<void> {
+
+		if (!this._initialized) {
+
+			this._initialized = true;
+			return this._serviceInitialized();
+
+		}
+
+	}
+
+	/**
+	 * Start the service
+	 * @param {object} [options]
+	 */
+	public async start (options: object = {}): Promise<void> {
+
+		if (this._productionOnly && process.env.NODE_ENV !== 'production') {
+
+			this.warn('start', {message: 'skipping, production only'});
+			return;
+
+		}
+
+		if (this._running) {
+
+			this.info('start', {message: 'already running'});
+			return;
+
+		}
+
+		this._running = true;
+		this._stop = false;
+
+		this.info('start', {message: 'starting'});
+
+		const startTime = moment.tz('UTC');
+		let lastEx;
+
+		try {
+
+			await this.init();
+			await this._serviceStarted(options);
+
+		} catch (ex) {
+
+			lastEx = ex;
+
+		}
+
+		this._running = false;
+
+		const endTime = moment.tz('UTC');
+		const timeDiff = endTime.diff(startTime, 'minutes', true);
+
+		if (lastEx && lastEx.code !== 'STOP') {
+
+			this.error('start', {data: {timeDiff}, err: lastEx});
+
+			throw lastEx;
+
+		} else {
+
+			if (this._stop) {
+
+				this.info('start', {message: 'stopped', data: {timeDiff}});
+
+			} else {
+
+				this.info('start', { message: 'started', data: { timeDiff, version: this._version } });
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Stop the service
+	 */
+	public async stop (): Promise<void> {
+
+		this.info('stop');
+		this._stop = true;
+		return this._serviceStopped();
+
+	}
+
+	/**
 	 * Runs a delegate if the service is not stopped
 	 * @param delegate
 	 */
@@ -108,97 +199,6 @@ export default class Service extends Base {
 	protected async _serviceDisposed (): Promise<void> {
 
 		return;
-
-	}
-
-	/**
-	 * Initialize
-	 */
-	private async init (): Promise<void> {
-
-		if (!this._initialized) {
-
-			this._initialized = true;
-			return this._serviceInitialized();
-
-		}
-
-	}
-
-	/**
-	 * Start the service
-	 * @param {object} [options]
-	 */
-	private async start (options: object = {}): Promise<void> {
-
-		if (this._productionOnly && process.env.NODE_ENV !== 'production') {
-
-			this.warn('start', {message: 'skipping, production only'});
-			return;
-
-		}
-
-		if (this._running) {
-
-			this.info('start', {message: 'already running'});
-			return;
-
-		}
-
-		this._running = true;
-		this._stop = false;
-
-		this.info('start', {message: 'starting'});
-
-		const startTime = moment.tz('UTC');
-		let lastEx;
-
-		try {
-
-			await this.init();
-			await this._serviceStarted(options);
-
-		} catch (ex) {
-
-			lastEx = ex;
-
-		}
-
-		this._running = false;
-
-		const endTime = moment.tz('UTC');
-		const timeDiff = endTime.diff(startTime, 'minutes', true);
-
-		if (lastEx && lastEx.code !== 'STOP') {
-
-			this.error('start', {data: {timeDiff}, err: lastEx});
-
-			throw lastEx;
-
-		} else {
-
-			if (this._stop) {
-
-				this.info('start', {message: 'stopped', data: {timeDiff}});
-
-			} else {
-
-				this.info('start', { message: 'started', data: { timeDiff, version: this._version } });
-
-			}
-
-		}
-
-	}
-
-	/**
-	 * Stop the service
-	 */
-	private async stop (): Promise<void> {
-
-		this.info('stop');
-		this._stop = true;
-		return this._serviceStopped();
 
 	}
 
