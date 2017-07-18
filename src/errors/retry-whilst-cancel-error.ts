@@ -7,7 +7,6 @@ export default class RetryWhilstCancelError extends Error {
 
 	/**
 	 * Returns the inner error
-	 * @returns {?Error}
 	 */
 	get innerError (): Error | undefined {
 
@@ -17,8 +16,6 @@ export default class RetryWhilstCancelError extends Error {
 
 	/**
 	 * Constructor
-	 * @param {string} message
-	 * @param {Error} innerError
 	 */
 	constructor (message: string, innerError?: Error) {
 

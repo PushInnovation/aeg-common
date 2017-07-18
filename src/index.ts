@@ -1,4 +1,5 @@
 import RetryWhilstCancelError from './errors/retry-whilst-cancel-error';
+import DetailedError from './errors/detailed-error';
 import Base from './base';
 import BaseId from './base-id';
 import Service from './service';
@@ -9,7 +10,7 @@ import retryWhilst from './promises/retry-whilst';
 import { EventEmitter } from 'events';
 import * as moment from 'moment-timezone';
 
-const Errors = { RetryWhilstCancelError }; // tslint:disable-line
+const Errors = { RetryWhilstCancelError, DetailedError }; // tslint:disable-line
 
 const DateConversions = dateConversions; // tslint:disable-line
 

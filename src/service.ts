@@ -20,10 +20,6 @@ export default class Service extends Base {
 	private _stop: boolean;
 	private _version?: IServiceVersion;
 
-	/**
-	 * Constructor
-	 * @param {{productionOnly: boolean, logger: Object}} [options]
-	 */
 	constructor (options: {logger?: ILogger, productionOnly?: boolean, version?: IServiceVersion} = {}) {
 
 		options = options || {};
@@ -54,7 +50,6 @@ export default class Service extends Base {
 
 	/**
 	 * Start the service
-	 * @param {object} [options]
 	 */
 	public async start (options: object = {}): Promise<void> {
 
@@ -131,7 +126,6 @@ export default class Service extends Base {
 
 	/**
 	 * Runs a delegate if the service is not stopped
-	 * @param delegate
 	 */
 	public async checkStopped (delegate: () => Promise<void>): Promise<void> {
 
@@ -163,7 +157,6 @@ export default class Service extends Base {
 
 	/**
 	 * Initialized - override
-	 * @private
 	 */
 	protected async _serviceInitialized (): Promise<void> {
 
@@ -173,8 +166,6 @@ export default class Service extends Base {
 
 	/**
 	 * Service started - override
-	 * @param {object} [options]
-	 * @private
 	 */
 	protected async _serviceStarted (options?: object): Promise<void> {
 
@@ -184,7 +175,6 @@ export default class Service extends Base {
 
 	/**
 	 * Service stopped - override
-	 * @private
 	 */
 	protected async _serviceStopped (): Promise<void> {
 
@@ -194,7 +184,6 @@ export default class Service extends Base {
 
 	/**
 	 * Disposed - override
-	 * @private
 	 */
 	protected async _serviceDisposed (): Promise<void> {
 
