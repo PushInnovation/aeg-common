@@ -11,12 +11,15 @@
   },
   "license": "UNLICENSED",
   "scripts": {
-    "test": "mocha --recursive --compilers ts:ts-node/register --reporter mocha-junit-reporter test/unit/**/*.ts",
+    "test": "mocha --recursive --compilers ts:ts-node/register test/**/*.ts",
     "test:coverage": "nyc npm run test",
     "lint": "tslint src/**/*.ts",
-    "lint:watch": "npm run lint && onchange \"**/*.ts\" \"tslint.json\" -- npm run lint",
+    "lint:watch": "npm run tslint && onchange \"**/*.ts\" \"tslint.json\" -- npm run lint",
     "compile": "tsc",
-    "build": "npm run lint && npm run compile && npm run test:coverage",
+    "compile:watch": "npm run compile -- --watch",
+    "dev": "npm run compile:watch",
+    "build:test": "mocha --recursive --compilers ts:ts-node/register --reporter mocha-junit-reporter test/**/*.ts",
+    "build:coverage": "nyc npm run build:test",
     "patch": "git reset --hard HEAD && git clean -fd && npm run compile && npm version patch -m \"[ci skip] %s\" && git push origin master && git push origin master --tags && npm publish"
   },
   "nyc": {
