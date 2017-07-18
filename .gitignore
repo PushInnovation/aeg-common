@@ -36,3 +36,4 @@ xunit.xml
 
 /.idea/workspace.xml
 test-results.xml
+.nyc_output

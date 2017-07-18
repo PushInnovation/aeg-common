@@ -10,11 +10,6 @@ export default class BaseId extends Base {
 
 	private _id: string;
 
-	/**
-	 * Constructor
-	 * @param {string} id
-	 * @param {object} options
-	 */
 	constructor (id: string, options: {logger?: ILogger} = {}) {
 
 		super(options);
@@ -23,22 +18,12 @@ export default class BaseId extends Base {
 
 	}
 
-	/**
-	 * Get the id
-	 * @returns {*}
-	 */
 	get id (): string {
 
 		return this._id;
 
 	}
 
-	/**
-	 * Emit an event
-	 * @param {string} event
-	 * @param {string} caller
-	 * @param {ILoggerOptions} options
-	 */
 	public emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
 
 		const data = {};
@@ -49,44 +34,24 @@ export default class BaseId extends Base {
 
 	}
 
-	/**
-	 * Log debug
-	 * @param {string} caller
-	 * @param {ILoggerOptions} options
-	 */
 	public debug (caller: string, options: ILoggerOptions = {}): void {
 
 		super.debug(caller, this._resolveLogData(options));
 
 	}
 
-	/**
-	 * Log info
-	 * @param {string} caller
-	 * @param {ILoggerOptions} options
-	 */
 	public info (caller: string, options: ILoggerOptions = {}): void {
 
 		super.info(caller, this._resolveLogData(options));
 
 	}
 
-	/**
-	 * Log warn
-	 * @param {string} caller
-	 * @param {ILoggerOptions} options
-	 */
 	public warn (caller: string, options: ILoggerOptions = {}): void {
 
 		super.warn(caller, this._resolveLogData(options));
 
 	}
 
-	/**
-	 * Log error
-	 * @param {string} caller
-	 * @param {ILoggerOptions} options
-	 */
 	public error (caller: string, options: ILoggerOptions = {}): void {
 
 		super.error(caller, this._resolveLogData(options));
@@ -95,9 +60,6 @@ export default class BaseId extends Base {
 
 	/**
 	 * Resolves the log data with this's id
-	 * @param {ILoggerOptions} options
-	 * @returns {*}
-	 * @private
 	 */
 	private _resolveLogData (options: ILoggerOptions = {}): ILoggerOptions {
 
