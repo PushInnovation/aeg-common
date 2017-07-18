@@ -51,7 +51,7 @@ export function convertESTStringToUTCString (est: string, format: string): strin
  * @param {Moment} moment
  * @return {string}
  */
-export function momentToString (thisMoment: moment): string {
+export function momentToString (thisMoment: moment.Moment): string {
 
 	return thisMoment.format(dateFormatString);
 
@@ -62,7 +62,7 @@ export function momentToString (thisMoment: moment): string {
  * @param {string} str
  * @return {Moment}
  */
-export function stringToMoment (str: string): moment {
+export function stringToMoment (str: string): moment.Moment {
 
 	return moment(str, dateFormatString);
 
@@ -73,7 +73,7 @@ export function stringToMoment (str: string): moment {
  * @param {string} utc
  * @return {Moment}
  */
-export function utcStringToMoment (utc: string): moment {
+export function utcStringToMoment (utc: string): moment.Moment {
 
 	return moment.tz(utc, dateFormatString, 'UTC');
 
@@ -86,7 +86,7 @@ export function utcStringToMoment (utc: string): moment {
  */
 export function unixTimestampToUTCString (timestamp: number): string {
 
-	return moment.tz(timestamp, 'X', 'UTC').format(dateFormatString);
+	return moment.tz(timestamp.toString(), 'X', 'UTC').format(dateFormatString);
 
 }
 
@@ -108,8 +108,8 @@ export function utcStringToUnixTimestamp (utc: string): number {
  * @param {Object} [options] - moment: the date time to resolve, otherwise now
  * @returns {{startDate: *, endDate: *}}
  */
-export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment: moment })
-	: { startDate: moment, startDateString: string, endDate: moment, endDateString: string } {
+export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment: moment.Moment })
+	: { startDate: moment.Moment, startDateString: string, endDate: moment.Moment, endDateString: string } {
 
 	let startDateClient, endDateClient, m;
 

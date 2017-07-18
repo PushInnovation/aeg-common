@@ -80,7 +80,7 @@ describe('retryWhilst', async () => {
 
 		attempts.should.be.equal(3);
 		should.exist(err);
-		const diff = end.diff(start, 'seconds');
+		const diff: any = end.diff(start, 'seconds');
 		diff.should.be.aboveOrEqual(3);
 
 	});
