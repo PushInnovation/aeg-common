@@ -7,6 +7,7 @@ import forever from './promises/forever';
 import eachLimit from './promises/each-limit';
 import retryWhilst from './promises/retry-whilst';
 import { EventEmitter } from 'events';
+import * as moment from 'moment-timezone';
 
 const Errors = { RetryWhilstCancelError }; // tslint:disable-line
 

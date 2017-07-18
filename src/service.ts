@@ -1,6 +1,6 @@
 import { ILogger } from '@adexchange/aeg-logger';
 import Base from './base';
-import moment from 'moment-timezone';
+import * as moment from 'moment-timezone';
 import ServiceStoppedError from './errors/service-stopped-error';
 
 export interface IServiceVersion {
