@@ -24,8 +24,6 @@ export default {
 
 /**
  * Convert UTC Date string to EST string
- * @param {string} utc
- * @return {string}
  */
 export function convertUTCStringToESTString (utc: string): string {
 
@@ -35,9 +33,6 @@ export function convertUTCStringToESTString (utc: string): string {
 
 /**
  * Convert EST date string to UTC string
- * @param {string} est
- * @param {string} [format]
- * @return {string}
  */
 export function convertESTStringToUTCString (est: string, format: string): string {
 
@@ -48,8 +43,6 @@ export function convertESTStringToUTCString (est: string, format: string): strin
 
 /**
  * Moment to string
- * @param {Moment} moment
- * @return {string}
  */
 export function momentToString (thisMoment: moment.Moment): string {
 
@@ -59,8 +52,6 @@ export function momentToString (thisMoment: moment.Moment): string {
 
 /**
  * String to moment
- * @param {string} str
- * @return {Moment}
  */
 export function stringToMoment (str: string): moment.Moment {
 
@@ -70,8 +61,6 @@ export function stringToMoment (str: string): moment.Moment {
 
 /**
  * UTC date string to moment
- * @param {string} utc
- * @return {Moment}
  */
 export function utcStringToMoment (utc: string): moment.Moment {
 
@@ -81,8 +70,6 @@ export function utcStringToMoment (utc: string): moment.Moment {
 
 /**
  * Unix timestamp to UTC date string
- * @param {number} timestamp
- * @return {string}
  */
 export function unixTimestampToUTCString (timestamp: number): string {
 
@@ -92,8 +79,6 @@ export function unixTimestampToUTCString (timestamp: number): string {
 
 /**
  * UTC date string to unix timestamp
- * @param {string} utc
- * @return {number}
  */
 export function utcStringToUnixTimestamp (utc: string): number {
 
@@ -103,10 +88,6 @@ export function utcStringToUnixTimestamp (utc: string): number {
 
 /**
  * Resolves the requested interval to UTC start and end dates
- * @param {string} interval - hourly, daily, yesterday, weekly, last-week, monthly, yearly
- * @param {string} timezone
- * @param {Object} [options] - moment: the date time to resolve, otherwise now
- * @returns {{startDate: *, endDate: *}}
  */
 export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment: moment.Moment })
 	: { startDate: moment.Moment, startDateString: string, endDate: moment.Moment, endDateString: string } {

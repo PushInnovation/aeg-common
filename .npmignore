@@ -6,3 +6,5 @@ circle.yml
 test-results.xml
 tsconfig.json
 tslint.json
+.nyc_output
+/coverage

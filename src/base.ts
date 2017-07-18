@@ -40,10 +40,6 @@ export default class Base extends EventEmitter {
 	 *      someArg = args.shift();
 	 *      callback = args.pop();
 	 *      options = this._parseOptions(args);
-	 *
-	 * @param {object[]} args
-	 * @returns {*|{}}
-	 * @private
 	 */
 	public parseOptions (args: object[]): object {
 
@@ -51,12 +47,6 @@ export default class Base extends EventEmitter {
 
 	}
 
-	/**
-	 * Emit an event
-	 * @param {string} event
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 */
 	public emit (event: string, caller: string, options: ILoggerOptions = {}): boolean {
 
 		const body: any = {};
@@ -85,11 +75,6 @@ export default class Base extends EventEmitter {
 
 	}
 
-	/**
-	 * Log debug
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 */
 	public debug (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
@@ -100,11 +85,6 @@ export default class Base extends EventEmitter {
 
 	}
 
-	/**
-	 * Log info
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 */
 	public info (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
@@ -115,11 +95,6 @@ export default class Base extends EventEmitter {
 
 	}
 
-	/**
-	 * Log warn
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 */
 	public warn (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
@@ -130,11 +105,6 @@ export default class Base extends EventEmitter {
 
 	}
 
-	/**
-	 * Log error
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 */
 	public error (caller: string, options: ILoggerOptions = {}): void {
 
 		if (this._logger) {
@@ -147,10 +117,6 @@ export default class Base extends EventEmitter {
 
 	/**
 	 * Internal log handler
-	 * @param {function} delegate
-	 * @param {string} caller
-	 * @param {ILoggerConfig} options
-	 * @private
 	 */
 	private _log (delegate: (message: string, data?: object) => void, caller: string, options: ILoggerOptions = {}): void {
 

@@ -7,7 +7,6 @@ export default class ServiceStoppedError extends Error {
 
 	/**
 	 * Gets the error code
-	 * @returns {string}
 	 */
 	get code (): string {
 
