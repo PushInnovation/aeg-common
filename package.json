@@ -1,6 +1,6 @@
 {
   "name": "@adexchange/aeg-common",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "Common classes",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -20,25 +20,25 @@
     "patch": "git reset --hard HEAD && git clean -fd && npm run compile && npm version patch -m \"[ci skip] %s\" && git push origin master && git push origin master --tags && npm publish"
   },
   "nyc": {
-	"include": [
-		"src/**/*.ts"
-	],
-	"exclude": [
-		"**/*.d.ts"
-	],
-	"extension": [
-		".ts"
-	],
-	"require": [
-		"ts-node/register"
-	],
-	"reporter": [
-		"json",
-		"html"
-	],
-	"all": true
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ],
+    "all": true
   },
- "devDependencies": {
+  "devDependencies": {
     "@types/mocha": "^2.2.41",
     "@types/moment-timezone": "^0.2.34",
     "@types/node": "^6.0.82",
