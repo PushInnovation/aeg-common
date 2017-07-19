@@ -4,6 +4,7 @@
 		"lib": [ "es2015" ],
 		"outDir": "lib",
 		"sourceMap": true,
+		"inlineSources": true,
 		"declaration": true,
 		"moduleResolution": "node",
 		"strictNullChecks": true,
