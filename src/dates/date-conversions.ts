@@ -89,7 +89,7 @@ export function utcStringToUnixTimestamp (utc: string): number {
 /**
  * Resolves the requested interval to UTC start and end dates
  */
-export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment: moment.Moment })
+export function resolveUTCIntervals (interval: string, timezone: string, options?: { moment?: moment.Moment })
 	: { startDate: moment.Moment, startDateString: string, endDate: moment.Moment, endDateString: string } {
 
 	let startDateClient, endDateClient, m;
