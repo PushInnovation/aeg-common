@@ -4,6 +4,7 @@ import DetailedError from './errors/detailed-error';
 import Base from './base';
 import BaseId from './base-id';
 import Service from './service';
+import { ServiceInterval } from './service-interval';
 import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
 import eachLimit from './promises/each-limit';
@@ -17,6 +18,6 @@ const DateConversions = dateConversions; // tslint:disable-line
 
 const ControlFlow = {forever, eachLimit, retryWhilst}; // tslint:disable-line
 
-export { Errors, Base, BaseId, Service, ControlFlow, DateConversions };
+export { Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions };
 
-export default {Errors, Base, BaseId, Service, ControlFlow, DateConversions};
+export default {Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions};
