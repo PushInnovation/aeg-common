@@ -33,11 +33,14 @@ export abstract class ServiceInterval extends Service {
 
 				} catch (ex) {
 
-					this.error('_serviceStarted: _handler failed', ex);
-
 					if (ex instanceof ServiceIntervalCancelError) {
 
+						this.warn('_serviceStarted: _handler cancelled', ex);
 						throw ex;
+
+					} else {
+
+						this.error('_serviceStarted: _handler failed', ex);
 
 					}
 
