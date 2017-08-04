@@ -3,9 +3,9 @@ import { Promise as BBPromise } from 'bluebird';
 /**
  * Run a promise over and over forever
  */
-export default async function forever (delegate: () => BBPromise<void>) {
+export default async function forever (delegate: () => BBPromise<void>, context?: any) {
 
-	return BBPromise.coroutine(function* (innerDelegate) {
+	const cr = BBPromise.coroutine(function* (innerDelegate) {
 
 		let done: boolean = false;
 
@@ -15,6 +15,14 @@ export default async function forever (delegate: () => BBPromise<void>) {
 
 		}
 
-	})(delegate);
+	});
+
+	if (context) {
+
+		delegate.bind(context);
+
+	}
+
+	return cr(delegate);
 
 }
