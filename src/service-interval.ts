@@ -62,6 +62,6 @@ export abstract class ServiceInterval extends Service {
 
 	}
 
-	protected abstract _handler (): Promise<void> | void;
+	protected abstract _handler (): Promise<any> | any;
 
 }
