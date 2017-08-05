@@ -16,7 +16,7 @@ class TestInterval extends ServiceInterval {
 
 	}
 
-	protected _handler (): Promise<void> | void {
+	protected _handler (): Promise<any> | any {
 
 		console.log('Fire!');
 
