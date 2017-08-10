@@ -34,7 +34,7 @@ export function convertUTCStringToESTString (utc: string): string {
 /**
  * Convert EST date string to UTC string
  */
-export function convertESTStringToUTCString (est: string, format: string): string {
+export function convertESTStringToUTCString (est: string, format?: string): string {
 
 	const f = format || dateFormatString;
 	return moment.tz(est, f, 'America/New_York').tz('UTC').format(dateFormatString);
