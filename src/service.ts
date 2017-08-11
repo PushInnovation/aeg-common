@@ -105,7 +105,7 @@ export default class Service extends Base {
 
 			} else {
 
-				this.info('start', { message: 'started', data: { timeDiff, version: this._version } });
+				this.info('start', { message: 'completed', data: { timeDiff, version: this._version } });
 
 			}
 
