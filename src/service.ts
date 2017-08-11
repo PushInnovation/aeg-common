@@ -20,7 +20,7 @@ export default class Service extends Base {
 	private _stop: boolean;
 	private _version?: IServiceVersion;
 
-	constructor (options: {logger?: ILogger, productionOnly?: boolean, version?: IServiceVersion} = {}) {
+	constructor (options: { logger?: ILogger, productionOnly?: boolean, version?: IServiceVersion } = {}) {
 
 		options = options || {};
 
@@ -70,7 +70,7 @@ export default class Service extends Base {
 		this._running = true;
 		this._stop = false;
 
-		this.info('start', {message: 'starting'});
+		this.info('start', {message: 'starting', data: {version: this._version}});
 
 		const startTime = moment.tz('UTC');
 		let lastEx;
@@ -105,7 +105,7 @@ export default class Service extends Base {
 
 			} else {
 
-				this.info('start', { message: 'started', data: { timeDiff, version: this._version } });
+				this.info('start', {message: 'completed', data: {timeDiff, version: this._version}});
 
 			}
 
