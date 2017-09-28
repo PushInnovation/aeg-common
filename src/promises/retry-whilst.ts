@@ -10,15 +10,15 @@ import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
 export default async function retryWhilst<T> (
 	retries: number,
 	delay: number,
-	delegate: (attempts: number) => Promise<T | null>,
+	delegate: (attempts: number) => Promise<T | undefined>,
 	emitter?: EventEmitter)
-	: Promise<T | null> {
+	: Promise<T | undefined> {
 
 	let tries: number = 0;
 	let done: boolean = false;
 	let lastErr: Error | null = null;
 	let cancelled: boolean = false;
-	let result: T | null = null;
+	let result: T | undefined = undefined;
 
 	while (tries < retries && !done && !cancelled) {
 
