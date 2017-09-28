@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/aeg-common
+    working_directory: ~/src
     docker:
-      - image: adexchangegrp/node6-build:latest
+      - image: $DOCKER_BUILD_IMAGE
     steps:
       - checkout
       - restore_cache:
