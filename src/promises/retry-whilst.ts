@@ -10,23 +10,17 @@ import RetryWhilstCancelError from '../errors/retry-whilst-cancel-error';
 export default async function retryWhilst<T> (
 	retries: number,
 	delay: number,
-	delegate: (attempts: number) => Promise<T | null>,
-	emitter?: EventEmitter)
-	: Promise<T | null> {
+	delegate: (attempts: number) => Promise<T | undefined>,
+	emitter?: EventEmitter): Promise<T | undefined> {
 
 	let tries: number = 0;
-	let done: boolean = false;
 	let lastErr: Error | null = null;
-	let cancelled: boolean = false;
-	let result: T | null = null;
 
-	while (tries < retries && !done && !cancelled) {
+	while (tries < retries) {
 
 		try {
 
-			result = await Promise.resolve(delegate(tries + 1));
-
-			done = true;
+			return await Promise.resolve(delegate(tries + 1));
 
 		} catch (ex) {
 
@@ -38,7 +32,7 @@ export default async function retryWhilst<T> (
 
 				} else {
 
-					cancelled = true;
+					return;
 
 				}
 
@@ -52,10 +46,6 @@ export default async function retryWhilst<T> (
 
 				}
 
-			}
-
-			if (!cancelled) {
-
 				await BBPromise.delay(delay);
 
 				tries++;
@@ -66,12 +56,6 @@ export default async function retryWhilst<T> (
 
 	}
 
-	if (!done && !cancelled) {
-
-		throw lastErr;
-
-	}
-
-	return result;
+	throw lastErr;
 
 }
