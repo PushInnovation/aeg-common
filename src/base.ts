@@ -1,4 +1,4 @@
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 import * as EventEmitter from 'events';
 import * as _ from 'lodash';
 

@@ -1,4 +1,4 @@
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 
 function handler (message: string, error: Error, logger: ILogger): void {
 
