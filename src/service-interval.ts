@@ -1,5 +1,5 @@
 import Service, { IServiceVersion } from './service';
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 import forever from './promises/forever';
 import * as BBPromise from 'bluebird';
 import ServiceIntervalCancelError from './errors/service-interval-cancel-error';

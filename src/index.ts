@@ -10,7 +10,7 @@ import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
 import eachLimit from './promises/each-limit';
 import retryWhilst from './promises/retry-whilst';
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 import { EventEmitter } from 'events';
 import * as moment from 'moment-timezone';
 
