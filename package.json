@@ -1,5 +1,5 @@
 {
-  "name": "@adexchange/aeg-common",
+  "name": "@push_innovation/aeg-common",
   "version": "0.0.1",
   "description": "Common classes",
   "main": "./lib/index.js",
@@ -7,7 +7,7 @@
   "author": "Justin Durham",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdExchangeGrp/aeg-common.git"
+    "url": "https://github.com/pushinnovation/aeg-common.git"
   },
   "license": "UNLICENSED",
   "scripts": {
