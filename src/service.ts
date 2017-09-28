@@ -1,4 +1,4 @@
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 import Base from './base';
 import * as moment from 'moment-timezone';
 import ServiceStoppedError from './errors/service-stopped-error';

@@ -2,7 +2,7 @@ import { ServiceInterval } from '../../src/service-interval';
 import ServiceIntervalCancelError from '../../src/errors/service-interval-cancel-error';
 import * as should from 'should';
 import { IServiceVersion } from '../../src/service';
-import { ILogger } from '@adexchange/aeg-logger';
+import { ILogger } from '@push_innovation/aeg-logger';
 
 class TestInterval extends ServiceInterval {
 
