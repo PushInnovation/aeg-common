@@ -56,7 +56,7 @@
     "typescript": "^2.4.1"
   },
   "dependencies": {
-    "@push_innovation/aeg-logger": "0.0.6",
+    "@push_innovation/aeg-logger": "0.0.12",
     "async": "^2.1.5",
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.4.7",
