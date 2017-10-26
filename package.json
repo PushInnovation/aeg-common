@@ -12,7 +12,6 @@
   "license": "UNLICENSED",
   "scripts": {
     "test": "mocha --recursive --compilers ts:ts-node/register test/**/*.ts",
-    "test2": "mocha --recursive --compilers ts:ts-node/register test/**/argh.ts",
     "test:service-interval": "mocha --recursive --compilers ts:ts-node/register test/unit/service-interval.unit.test.ts",
     "test:coverage": "nyc npm run test",
     "lint": "tslint src/**/*.ts",
