@@ -8,7 +8,6 @@ import { ServiceInterval } from './service-interval';
 import registerUnhandled from './unhandled';
 import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
-import eachLimit from './promises/each-limit';
 import retryWhilst from './promises/retry-whilst';
 import { ILogger } from '@adexchange/aeg-logger';
 import { EventEmitter } from 'events';
@@ -18,8 +17,8 @@ const Errors = {RetryWhilstCancelError, ServiceIntervalCancelError, DetailedErro
 
 const DateConversions = dateConversions; // tslint:disable-line
 
-const ControlFlow = {forever, eachLimit, retryWhilst}; // tslint:disable-line
+const ControlFlow = {forever, retryWhilst}; // tslint:disable-line
 
 export { Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled };
 
-export default { Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled };
+export default {Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled};
