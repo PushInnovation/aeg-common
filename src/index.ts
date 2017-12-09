@@ -12,6 +12,7 @@ import retryWhilst from './promises/retry-whilst';
 import { ILogger } from '@adexchange/aeg-logger';
 import { EventEmitter } from 'events';
 import * as moment from 'moment-timezone';
+import * as Map from './collections/map';
 
 const Errors = {RetryWhilstCancelError, ServiceIntervalCancelError, DetailedError}; // tslint:disable-line
 
@@ -19,6 +20,18 @@ const DateConversions = dateConversions; // tslint:disable-line
 
 const ControlFlow = {forever, retryWhilst}; // tslint:disable-line
 
-export { Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled };
+const Collections = {Map}; // tslint:disable-line
 
-export default {Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled};
+export { Errors, Base, BaseId, Service, ServiceInterval, ControlFlow, DateConversions, registerUnhandled, Collections };
+
+export default {
+	Errors,
+	Base,
+	BaseId,
+	Service,
+	ServiceInterval,
+	ControlFlow,
+	DateConversions,
+	registerUnhandled,
+	Collections
+};
