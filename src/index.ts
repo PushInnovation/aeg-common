@@ -9,6 +9,7 @@ import registerUnhandled from './unhandled';
 import dateConversions from './dates/date-conversions';
 import forever from './promises/forever';
 import retryWhilst from './promises/retry-whilst';
+import settle from './promises/settle';
 import { ILogger } from '@adexchange/aeg-logger';
 import { EventEmitter } from 'events';
 import * as moment from 'moment-timezone';
@@ -18,7 +19,7 @@ const Errors = {RetryWhilstCancelError, ServiceIntervalCancelError, DetailedErro
 
 const DateConversions = dateConversions; // tslint:disable-line
 
-const ControlFlow = {forever, retryWhilst}; // tslint:disable-line
+const ControlFlow = {forever, retryWhilst, settle}; // tslint:disable-line
 
 const Collections = {Map}; // tslint:disable-line
 
